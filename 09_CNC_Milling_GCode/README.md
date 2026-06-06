@@ -1,3 +1,17 @@
+<div align="center">
+
+[← back to portfolio](../README.md)
+
+# 🛠️ Project 09
+
+[![Tech1](https://img.shields.io/badge/-G_Code-374151?style=for-the-badge)](#)
+[![Tech2](https://img.shields.io/badge/-CNC_Simulator_Pro-374151?style=for-the-badge)](#)
+[![Tech3](https://img.shields.io/badge/-HobbyMill-991B1B?style=for-the-badge)](#)
+
+</div>
+
+---
+
 # 09 — CNC Milling: Hand-Written G-code
 
 > Laboratorijas darbs: CNC frēzes programmēšana G-kodos
@@ -114,93 +128,4 @@ G01 X43 Y80        (horizontal line - cross with vertical)
 G01 Z2
 ```
 
-Each star is a two-line cross (horizontal + vertical) made with the conical tool — gives the characteristic "star" appearance. Five stars at five positions around the rocket.
-
-![G-code snippet](images/09_cnc_gcode_snippet.png)
-
-*Fig. 2 — Syntax-highlighted excerpt of the G-code program: setup commands, header, T6 tool change, rocket body contour and G02 arc for the window*
-
----
-
-## Cutting parameters
-
-| Parameter | Value | Why |
-|---|---|---|
-| Spindle speed | 2500 rpm | Reasonable for Ø5 end mills in soft material |
-| Feed (body) | 400 mm/min | Standard contour milling |
-| Feed (windows / wings) | 300–350 mm/min | Slower for accuracy on detail features |
-| Depth of cut | 2 mm | Single full-depth pass at 2 mm |
-| Workpiece zero | Top-center of stock | `G92 X0 Y0 Z40` then `G92 Z20` on surface |
-
----
-
-## G & M codes used
-
-| Code | Meaning | Where |
-|---|---|---|
-| `G21` | Metric (mm) | Header |
-| `G90` | Absolute positioning | Header |
-| `G92` | Set coordinate system (work offset) | Header / clearance |
-| `G00` | Rapid traverse | Position moves |
-| `G01` | Linear interpolation (cutting) | Contour cuts |
-| `G02` | Circular interpolation (clockwise) | Window arc |
-| `M03` | Spindle on, clockwise | Each tool start |
-| `M06` | Tool change | `T6 M6` / `T7 M6` |
-
----
-
-## Files in this folder
-
-| File | Size | What's inside | How to view |
-|---|---:|---|---|
-| `CNC_Lab_Daniels_Skots_Lavs.doc` | 84 KB | **The full lab report** with the complete G-code program, screenshots from CNC Simulator Pro and tool definitions | Microsoft Word, LibreOffice |
-| `CNC_Lab_text.txt` | 2.3 KB | Text-only excerpt of the G-code program for direct copy-paste into CNC Sim Pro | Any text editor |
-| `1001.nc`, `1002.nc` | 99 / 137 KB | Additional G-code samples from CAM (Fusion 360 / 2D Contour outputs, T23 ball end mill) | Any text editor or CNC simulator |
-| `images/` | — | Figures used in this README | — |
-
----
-
-## How to open & run
-
-### View the report
-Open `CNC_Lab_Daniels_Skots_Lavs.doc` in Word or LibreOffice for the full narrative with screenshots.
-
-### Run the G-code in CNC Simulator Pro
-1. Install **CNC Simulator Pro** (free demo / paid full version from CNCSimulator.com)
-2. Launch and select **Mill** mode
-3. **File → New** to start with a blank workpiece
-4. Paste the G-code from `CNC_Lab_text.txt` into the editor — or open the `.doc` and copy from there
-5. Click **Compile** (verifies syntax)
-6. Click **Run** to simulate — the workpiece rotates in 3D and the cutting tool traces the path, removing material as it goes
-7. Speed up / slow down with the speed slider; pause to inspect a specific move
-
----
-
-## Skills demonstrated
-
-- **Manual G-code programming** — writing complete CNC programs by hand without CAM
-- **G-code instructions** — G00/G01/G02 (rapid / linear / circular), G21/G90 (units / mode), G92 (offsets)
-- **M-codes** — M03 (spindle on), M06 (tool change)
-- **CNC Simulator Pro setup commands** — `$Mill`, `$AddMillPart`, `$DefineMillTool`, etc.
-- **Tool / feed / speed selection** per operation type
-- **Multi-tool job sequencing** — T6 contours then T7 detail features
-- **Work-coordinate system setup** — `G92` offsets, zero on workpiece surface
-- **Cutting strategy** — separating rough/finish, choosing depth and feed per feature
-
----
-
-## Latvian summary (LV)
-
-Šis ir CNC frēzes programmēšanas laboratorijas darbs (RTU, 3. kurss, 16.11.2025), kurā raķete ar zvaigznēm tika izstrādāta uz 150 × 100 × 20 mm sagataves, izmantojot manuāli rakstītu G-kodu CNC Simulator Pro vidē.
-
-**Izmantotie instrumenti:**
-- T6 — Ø5 mm cilindriskā gala frēze ar plakanu galu (korpuss, kontūra, spārni)
-- T7 — Ø5 mm konusveida frēze (piecas zvaigznes)
-
-**Programmas struktūra:**
-1. CNC Simulator Pro definīcijas (`$Mill`, `$AddMillPart`, `$DefineMillTool`)
-2. Galvene: `G21` (mm), `G90` (absolūtais), `G92` darba nullpunkts
-3. T6 sekcija ar M03 ieslēgšanu, raķetes korpusa lineāro kontūru, G02 apļveida loku logam, spārniem un liesmai
-4. T7 sekcija ar zvaigžņu krustveida līnijām piecās pozīcijās
-
-Pilns G-koda pirmkods iekļauts failā `CNC_Lab_text.txt` un detalizētajā Word atskaitē `CNC_Lab_Daniels_Skots_Lavs.doc`.
+Each star is a two-line cross (horizontal + vertical) made with the conical tool — gives the characteristic "star" appearance. Five stars at five positions around 

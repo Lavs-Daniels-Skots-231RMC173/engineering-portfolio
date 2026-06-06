@@ -1,3 +1,17 @@
+<div align="center">
+
+[← back to portfolio](../README.md)
+
+# 🔌 Project 04
+
+[![Tech1](https://img.shields.io/badge/-Siemens_LOGO!-009999?style=for-the-badge)](#)
+[![Tech2](https://img.shields.io/badge/-GRAFCET-512BD4?style=for-the-badge)](#)
+[![Tech3](https://img.shields.io/badge/-FluidSIM-0091D5?style=for-the-badge)](#)
+
+</div>
+
+---
+
 # 04 — Automated Two-Hole Drilling Machine
 
 > Automatizēta iekārta divu urbumu izveidošanai sagatavē
@@ -86,70 +100,4 @@ After emergency, a **RESET** button manually re-arms: clears all outputs, deacti
 
 ### Auto / Manual modes (SOLU_R)
 
-![Auto/Manual modes](images/04_plc_modes.png)
-
-*Fig. 5 — Mode switching: button SOLU_R activates manual (step-by-step) mode where each transition waits for STEP press. AUTO returns to free-running automatic. Two indicator lights show which mode is active.*
-
-- **Auto mode** (default): full cycle runs continuously after START.
-- **Manual mode** (after pressing `SOLU_R`): cycle pauses at each transition. Operator presses **STEP** to advance one stage at a time. Useful for training, troubleshooting and slow walk-throughs.
-
-### Hands-off safety (HANDS_OFF)
-
-![Hands-off sensor](images/04_plc_handsoff.png)
-
-*Fig. 6 — HANDS_OFF gate: optical light-curtain sensor monitors the operator's hand zone. The cycle cannot start while the sensor is interrupted. Wired as a separate input; checked before START is enabled.*
-
-An optical sensor watches the work envelope. The cycle **cannot start** while the sensor is interrupted — so the operator's hand inside the working area blocks unsafe start-up. The sensor input is wired through the START enable.
-
----
-
-## Files in this folder
-
-| File | Size | What's inside | How to view |
-|---|---:|---|---|
-| `MD_3.uzd_Razosanas_Automatizacijas_pamati.docx` | 4.4 MB | Full study work report (LV) — narrative description, all 8 figures (electrical, GRAFCET, FluidSIM with minimal functionality, full FBD on PLC, AV.STOP, SOLU_R modes, HANDS_OFF, integrated final), conclusions. The main reference document. | Word/LibreOffice |
-| `fluidsim_sources/GRAFCET_FluidSIM.ct` | — | Original GRAFCET diagram from FluidSIM (Section A solution) | **FluidSIM** (Festo) |
-| `fluidsim_sources/Elektriska_shema.ct` | — | Electrical relay schematic — backbone for the FBD port | FluidSIM |
-| `fluidsim_sources/Hard_FBD.ct` | — | Full PLC FBD program with all safety + modes | FluidSIM |
-| `fluidsim_sources/Grafcet.ct` | — | Intermediate GRAFCET iteration | FluidSIM |
-| `fluidsim_sources/Automatizacija_final.ct` | — | Final integrated solution | FluidSIM |
-| `images/` | — | Extracted figures used in this README | — |
-
----
-
-## How to open the simulation files
-
-The `.ct` files are **FluidSIM project files** (Festo Didactic's electropneumatic / GRAFCET / PLC simulator).
-
-- **Software:** Festo FluidSIM (versions FluidSIM-P, FluidSIM-H, FluidSIM-E or the unified FluidSIM 6+). Demo versions are usually screen-shot only; the full version is needed to *run* the simulation but the file structure is readable for visual inspection.
-- **Open:** *File → Open* → select the `.ct` file
-- **Run:** *Simulation → Start* (or F9). The pneumatic cylinders animate, sensors trigger, the GRAFCET steps highlight, and the PLC outputs activate live.
-- **Inspect the FBD program:** double-click the PLC block → opens the block diagram view → you can step through inputs/outputs as the simulation runs.
-
-If you don't have FluidSIM available, the `.docx` report contains all 8 figures as embedded screenshots — sufficient to follow the design.
-
----
-
-## Skills demonstrated
-
-- **PLC programming** (Siemens LOGO! FBD)
-- **GRAFCET sequence design** — proper transition formulation, parallel/sequential structures
-- **FluidSIM electropneumatic + PLC co-simulation**
-- **Electrical relay schematic design** — set/reset, sequencing
-- **Industrial safety design**:
-  - E-stop architecture (relay K3 + Y8 air dump)
-  - Operating-mode switching (Auto / Manual STEP)
-  - Light-curtain hand-presence interlock
-- **Multi-mode operator interface** (AUTO, MANUAL STEP, RESET, AV STOP)
-
----
-
-## Latvian summary (LV)
-
-Šis projekts ir automātiska divu urbumu urbšanas iekārta — pilna automatizācijas sistēma trim pneimocilindriem (A iespīlēšana, B urbja padeve, C kamanu pārvietošana) un urbja rotācijas elektromotoram. Risinājums sastāv no divām daļām: **A sadaļa** — GRAFCET sekvences diagramma FluidSIM vidē; **B sadaļa** — programmēta vadība FBD (funkciju bloku diagramma) formā uz Siemens LOGO!
-
-Galvenais GRAFCET izstrādes mācība: P1 spiediena sensors jāizmanto kā vārti starp iespīlēšanas un urbšanas soļiem (nevis tikai A1 gala stāvokli) — tas nodrošina pareizu iespīlēšanas spēka kontroli pirms urbšanas sākuma.
-
-Pievienoti drošības un operatora režīmi: **AV.STOP** (avārijas apturēšana ar K3 + Y8 pneimatiskās padeves pārtraukšanu), **SOLU_R** (manuālais soļa pa solim režīms ar STEP pogu), **HANDS_OFF** (optiskais sensors bloķē cikla palaišanu, ja darba zonā ir roka).
-
-Pilna dokumentācija failā `MD_3.uzd_Razosanas_Automatizacijas_pamati.docx`. Visi FluidSIM projektu faili (`*.ct`) — `fluidsim_sources/` apakšmapē.
+![Auto/Manual mod

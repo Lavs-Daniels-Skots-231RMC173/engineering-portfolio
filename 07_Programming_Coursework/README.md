@@ -1,3 +1,17 @@
+<div align="center">
+
+[← back to portfolio](../README.md)
+
+# 💻 Project 07
+
+[![Tech1](https://img.shields.io/badge/-Python-3776AB?style=for-the-badge)](#)
+[![Tech2](https://img.shields.io/badge/-C/C++-00599C?style=for-the-badge)](#)
+[![Tech3](https://img.shields.io/badge/-SQL-003B57?style=for-the-badge)](#)
+
+</div>
+
+---
+
 # 07 — Programming Coursework: 16 Progressive Tasks
 
 > 16 autograded assignments — Python → C/C++ → SQL → Flask web app
@@ -128,107 +142,4 @@ The fiftyville investigation (task 14) is a recreated "CS50-style" mystery where
 
 ![Flask routes](images/07_flask_routes.png)
 
-*Fig. 3 — Flask app routes (`app.py`): GET/POST handling for the input form and output page, with SQLite parameterized inserts*
-
-The capstone of the course year. `task16_web/` contains a complete Flask web application — a Spotify-themed music recommendation site.
-
-**Architecture:**
-- `app.py` — Flask backend with three routes:
-  - `/` and `/index.html` — landing page
-  - `/input_page.html` — form (mood dropdown + genre dropdown + username + checkbox + submit)
-  - `/output_page.html` — displays recommendation, embedded Spotify iframe, and saves the lookup to SQLite
-- `sql_connection.py` — SQLite layer:
-  - `create_db_table()` — initial schema setup on first run
-  - `insert_data(...)` — parameterized INSERT (no SQL injection)
-  - `retrieve_all_data()` — SELECT all rows
-  - `try_query_add()` / `try_query_retrieve()` — generic query interface
-- `templates/` — Jinja2 templates: `head.html` (shared header), `index.html`, `input_page.html`, `output_page.html`, `form_example.html` (reference)
-- `static/style.css` — custom CSS extending Bootstrap
-- `static/images/` — assets (Spotify icon, profile photo)
-- `data_files/custom_db.db` — SQLite database file
-
-**Stack:** Python + Flask + Jinja2 + SQLite + Bootstrap + custom CSS + JavaScript
-
-**Database design:** generic `demo` table with 5 INT fields and 5 STRING fields — proves the concept of a flexible schema even though only 5 string fields are actively used (username, mood, genre, track_title, spotify_url).
-
-**Recommendation engine:** simple two-key dictionary `recommendations[mood][genre]` returning `(track_title, spotify_url)`. Easy to extend.
-
-`README(AI usage).md` — Documents the AI usage during development (Daniel's own reflection from the time of submission): which problems were AI-assisted, why, and what was verified manually before committing.
-
----
-
-## Files & folder structure
-
-Each `taskNN_*/` subfolder contains the original source files for that task — exactly as they were committed to and graded by GitHub Classroom. Folders may include:
-- Source code (`*.py`, `*.c`, `*.cpp`, `*.h`)
-- Test files (often `test_1.py`, `test_2.py`, ...)
-- README from the assignment (`README.md`)
-- Lesson materials (`lesson.py` where present)
-- Build outputs (cleaned via `.gitignore` for C tasks)
-
----
-
-## How to run a task
-
-### Python tasks (01-09)
-```bash
-cd task04_text-analysis
-python main.py
-```
-
-### C tasks (10-14)
-```bash
-cd task14_memory-allocation
-gcc -Wall -o read main.c
-./read plates.txt
-```
-
-For task 14, to verify zero memory leaks:
-```bash
-valgrind --leak-check=full ./read plates.txt
-```
-
-### SQL task (15)
-```bash
-cd task15_db
-# Requires movies.db / fiftyville.db (excluded from repo, see note above)
-python 8.py
-```
-
-### Web task (16)
-```bash
-cd task16_web
-pip install flask
-flask run
-# Visit http://127.0.0.1:5000 in browser
-```
-
----
-
-## Skills demonstrated
-
-- **Python** — fundamentals through API requests
-- **C / C++** — fundamentals, arrays, linked lists, algorithms
-- **Dynamic memory management in C** — `malloc`/`free`, clean error recovery, valgrind-verified
-- **Data structures & algorithms** — sorting (bubble, selection), searching (linear, binary), linked lists
-- **SQL (SQLite)** — SELECT, JOIN, LEFT JOIN, GROUP BY, complex multi-table queries
-- **Flask** — routes, GET/POST, Jinja templates
-- **Bootstrap + custom CSS** — responsive UI with custom Spotify-themed styling
-- **JavaScript** — basic frontend interactivity
-- **REST / JSON APIs** — HTTP request, JSON parsing
-- **GitHub Classroom workflow** — autograded assignment submissions
-- **Parameterized SQL queries** — SQL injection avoidance
-
----
-
-## Latvian summary (LV)
-
-Šis ir 16 progresīvu programmēšanas uzdevumu komplekts no RTU programmēšanas kursa (GitHub Classroom, 2024./2025.):
-
-- **Python pamati (01–09)** — ievads/izvads, datu tipi, cikli, virkņu apstrāde (Coleman-Liau lasāmības indekss), funkcijas, saraksti, vārdnīcas, ārējās bibliotēkas (FIGlet), API pieprasījumi (Game of Thrones JSON)
-- **C / C++ (10–13)** — pirmais C kods, masīvi un tipa konversijas, algoritmi: bubble sort ar saistītajiem sarakstiem, selection sort, linear & binary search
-- **Dinamiskā atmiņa C (14)** — `malloc`/`fread`/`free` lietojums, korektais kļūdu apstrādes ceļš (atbrīvošana atmiņas piešķiršanas neveiksmes gadījumā), **valgrind verifikācija**
-- **SQL (15)** — 14 SQL pieprasījumi pret SQLite datu bāzēm (movies.db + fiftyville.db) — no SELECT/WHERE līdz vairāku tabulu JOIN izmeklēšanas vaicājumiem. Kopā 25 punkti.
-- **Pilna tīmekļa aplikācija (16)** — Spotify stila mūzikas rekomendāciju vietne ar Flask + SQLite + Jinja + Bootstrap + custom CSS + JS. Datu bāzes glabāšana ar parametrizētiem vaicājumiem (drošība pret SQL injekciju), dinamiska Spotify iframe iebūvēšana.
-
-Visu uzdevumu pirmkods atrodas `taskNN_*/` apakšmapēs ar oriģinālo struktūru no GitHub Classroom — visi 16 ir izpildīti un automātiski novērtēti.
+*Fig. 3 — Flask app routes (`app.py`): GET/POST handling for th

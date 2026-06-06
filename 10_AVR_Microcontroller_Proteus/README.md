@@ -1,3 +1,17 @@
+<div align="center">
+
+[← back to portfolio](../README.md)
+
+# ⚙️ Project 10
+
+[![Tech1](https://img.shields.io/badge/-Atmel_AVR-009DDA?style=for-the-badge)](#)
+[![Tech2](https://img.shields.io/badge/-Microchip_Studio-EE3124?style=for-the-badge)](#)
+[![Tech3](https://img.shields.io/badge/-Proteus-3F51B5?style=for-the-badge)](#)
+
+</div>
+
+---
+
 # 10 — AVR Microcontroller: 9 C Programs + Proteus Simulation
 
 > Mikrokontroleru programmēšana C valodā (AVR / Microchip Studio) ar Proteus simulāciju
@@ -123,90 +137,4 @@ The classic "delay + re-read" pattern eliminates bouncing without a hardware deb
 
 1. Operator turns the **potentiometer**
 2. ADC samples it continuously (interrupt-driven, ~7800 samples/sec at /128 prescaler)
-3. Sample value sets **OCR2** → PWM duty → motor speed proportionally
-4. Sample value also sets the **LED bar graph** mask → 0–8 LEDs lit
-5. Operator presses **forward** or **reverse** button → H-bridge switches → motor direction flips
-6. Without buttons → motor stops (debounced state ignores transient noise)
-
-This is a complete embedded control system — sensor input, real-time conversion, PWM actuator output, state machine, debouncing, visual feedback — all on an 8-bit MCU.
-
----
-
-## Files in this folder
-
-### Source code (`code/`)
-
-| File | Topic |
-|---|---|
-| `01_pr_darbs_LED_running_light.c` | First practical work (01.10.2025) — LED running light with START/STOP buttons |
-| `02_LED_reset_start_stop.c` | 3-button state machine (RESET / START / STOP) |
-| `03_timer_overflow_isr.c` | Timer0 overflow ISR |
-| `04_app3.c`, `05_app4.c`, `07_app6.c`, `08_app8.c` | Intermediate exercises |
-| `06_timer_compare_isr.c` | Timer0 CTC compare ISR (F_CPU = 1 MHz) |
-| `09_motor_control_ADC_PWM_Hbridge.c` | **Flagship — DC motor controller** |
-
-### Proteus simulations (`proteus/`)
-
-| File | What it simulates |
-|---|---|
-| `2_pr_darbs.pdsprj` | Practical work 2 — schematic with AVR + LEDs + buttons + display |
-| `3_pr_darbs.pdsprj` | Practical work 3 — schematic with AVR + timers |
-| `4_pr_darbs.pdsprj` | Practical work 4 |
-| `laboratorijas_5.pdsprj` | Lab 5 circuit (December 2025) |
-
----
-
-## How to open & run
-
-### View the source code
-Any text editor works (Notepad++, VS Code) — `.c` files are plain ASCII.
-
-### Compile and simulate
-**Software needed:**
-- **Microchip Studio** (free from Microchip — the official AVR IDE, formerly Atmel Studio)
-- **Proteus Design Suite** (Labcenter Electronics) — for the `.pdsprj` simulations
-
-**Steps:**
-1. In Microchip Studio: **File → New → Project → GCC C Executable Project**, target device `ATmega16` (or whatever the original was)
-2. Replace the generated `main.c` with the chosen `.c` from `code/`
-3. **Build → Build Solution** (F7) — produces a `.hex` file
-4. Open the `.pdsprj` in Proteus
-5. Right-click the AVR in the Proteus schematic → **Edit Properties** → set `Program File` to the `.hex` from step 3
-6. Click **Play** in Proteus → the simulation runs with the AVR executing the compiled code, LEDs blinking, buttons responsive, ADC reading the simulated potentiometer
-
-### Just read the code
-The source is well-commented and the patterns are explicit — every register is named in a comment so even without running it the intent is clear.
-
----
-
-## Skills demonstrated
-
-- **AVR C programming** — datasheet-level coding, not Arduino abstractions
-- **Register-level GPIO** — `DDRx`, `PORTx`, `PINx` direct configuration
-- **ADC** — interrupt-driven continuous sampling, AVCC reference, prescaler choice, channel selection
-- **Timer/PWM** — Timer2 Fast PWM mode, OC2 output, OCR2 duty control, prescaler selection
-- **Timer interrupts** — overflow and compare-match ISRs
-- **CTC mode** for Timer0
-- **Interrupt service routines (ISRs)** — `sei()`, vector names, ISR-safe code
-- **Bitwise register manipulation** — `(1 << BIT_NAME)` patterns throughout
-- **H-bridge motor direction control** with state machine
-- **Button debouncing** without hardware — software delay + re-read
-- **PWM duty-cycle control from sensor input** — closed-loop in 4 instructions
-- **LED bar graph display** — mathematical mask `0xFF << (8 - lvl)`
-- **Proteus circuit simulation**
-- **Microchip Studio toolchain** workflow
-
----
-
-## Latvian summary (LV)
-
-Šis ir AVR mikrokontroleru programmēšanas kursa darbu komplekts (RTU, 3. kurss, oktobris–decembris 2025) — deviņas C valodas programmas, kas progresē no LED mirgošanas līdz slēgtas cilpas līdzstrāvas motora vadībai. Visas programmas rakstītas reģistru līmenī (nevis Arduino abstrakcijas), debugētas Proteus vidē pirms ielādes.
-
-**Flagships projekts — GccApplication9 (19.11.2025):** pilna ieguldītā sistēma uz AVR @ 8 MHz, kas apvieno četrus periferijas modeļus:
-- **ADC** — 10-bit, AVCC bāze, kanāls 3, pārtraukuma vadīta nepārtraukta konversija (`ADC_vect` ISR pati pārstartē nākamo konversiju)
-- **Timer2 Fast PWM** — non-inverting OC2 izeja uz PB7, OCR2 aizpildījums no ADC nolasījuma (10→8 bit pārveidošana ar `>> 2`)
-- **LED bar graph** — 8 LED uz PORTD, līmenis ar maskas pieeju `0xFF << (8 - lvl)`
-- **H-tilta vadība** — PC0–PC3, virziena valstu mašīna (stāvoklis A / B / Stop)
-- **Pogu debounce** — 50 ms aizture un atkārtota nolasīšana uz PB0/PB1
-
-Pirmkods atrodas `code/` apakšmapē. Proteus simulācijas `.pdsprj` faili — `proteus/`. Atveramas attiecīgi ar Microchip Studio un Proteus Design Suite.
+3. Sample value sets **OCR2** → PWM duty → mo

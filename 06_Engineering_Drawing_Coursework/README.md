@@ -1,3 +1,17 @@
+<div align="center">
+
+[← back to portfolio](../README.md)
+
+# 📏 Project 06
+
+[![Tech1](https://img.shields.io/badge/-AutoCAD-E73239?style=for-the-badge)](#)
+[![Tech2](https://img.shields.io/badge/-ISO/LVS-1E40AF?style=for-the-badge)](#)
+[![Tech3](https://img.shields.io/badge/-Multi_View_Projection-374151?style=for-the-badge)](#)
+
+</div>
+
+---
+
 # 06 — Engineering Drawing Coursework
 
 > Inženiergrafikas studiju darbi — tehniskie rasējumi formātos A4 un A3
@@ -66,74 +80,4 @@ Third detail drawing. Practices:
 
 ![Detail A4 drawing](images/draw_04_uzd5-1.png)
 
-*Fig. 4 — Detail (A4, Task 5), scale 1:1*
-
-The final exercise in the sequence — a small/precise part on A4 portrait. Practices everything previous + tighter dimension placement, surface roughness symbols, and material spec for steel.
-
----
-
-## Files in this folder
-
-| File | Sheet | What's inside | How to view |
-|---|---|---|---|
-| `01_Balsts_A4.pdf` | A4 portrait, 1:1 | Bracket/support drawing | PDF viewer |
-| `02_Statne_A3.pdf` | A3 landscape, 1:1 | Frame/stand drawing | PDF viewer |
-| `03_Detala_A3.pdf` | A3 landscape, 1:1 | Detail drawing | PDF viewer |
-| `04_Uzd5_Detala_A4.pdf` | A4 portrait, 1:1 | Task 5 detail drawing | PDF viewer |
-| `images/` | — | High-resolution figures used in this README | — |
-
----
-
-## How to view & print
-
-The PDFs are **production-ready** — they print directly to A4 / A3 at the correct scale on any home or office printer. For physical reference:
-
-- A4 sheets: standard letter-size printer at 100% scale → 1:1 manufacturing reference
-- A3 sheets: A3-capable printer at 100% scale; or split-print onto two A4 sheets with overlap
-
-The title blocks contain all standard fields:
-- Drawing number
-- Part name (Balsts / Statne / Nosaukums)
-- Material
-- Scale (Mērogs)
-- Author (D.S. Lavs)
-- Supervisor signatures (N. Mozga + V. Uzvards)
-- Date
-- Sheet count
-
----
-
-## Foundation for later work
-
-The conventions practiced here are directly applied in:
-- **Project 02 (Metrology Shaft Detail)** — same title block, same dimensioning conventions, same Ra symbols, advanced GD&T
-- **Project 03 (RTK 4.7)** — part drawing, operation sketches, layout drawing all use the same ISO/LVS conventions but scaled up to A2
-
-So this folder is the engineering-drawing foundation; projects 02 and 03 are where the technique gets applied to substantive work.
-
----
-
-## Skills demonstrated
-
-- **ISO / LVS technical drawing conventions**
-- **Multi-view orthogonal projection** (first-angle)
-- **Section views** — full, partial, offset, aligned
-- **Dimensioning and tolerancing** — chain, baseline, general-tolerance fallback
-- **Surface roughness symbols** (Ra)
-- **Hidden-line and centerline conventions**
-- **Title-block discipline** — proper field population for LVS standard frame
-- **A4 / A3 sheet layout management**
-- **AutoCAD 2024 production workflow** — model space + layout sheets, viewports, printable PDF export
-
----
-
-## Latvian summary (LV)
-
-Šis ir inženiergrafikas pamatkursa darbu komplekts (RTU, RMCE01, 2024) — četri tehniskie rasējumi formātos A4 un A3, kas praktizē ISO/LVS standartus:
-
-- **Balsts** (A4, 1:1) — atbalsta detaļa
-- **Statne** (A3, 1:1) — rāmis/karkasa elements
-- **Detaļa** (A3, 1:1) — sarežģītāka komponente ar griezumiem
-- **Detaļa 5. uzdevumam** (A4, 1:1) — noslēdzošais vingrinājums
-
-Visi rasējumi seko LVS rakstrāmim, daudzskatu projicēšanai, griezumu un izmēru norādīšanai pēc standartiem. Šis darbu komplekts ir tehniskais pamats vēlākiem projektiem — Detaļas Nr. 10 metroloģijai (projekts 02) un RTK 4.7 kursa darbam (projekts 03).
+*Fig. 4 �

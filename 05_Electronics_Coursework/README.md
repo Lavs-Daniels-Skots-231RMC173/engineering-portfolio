@@ -1,3 +1,17 @@
+<div align="center">
+
+[← back to portfolio](../README.md)
+
+# 💡 Project 05
+
+[![Tech1](https://img.shields.io/badge/-PSIM-512BD4?style=for-the-badge)](#)
+[![Tech2](https://img.shields.io/badge/-Analog_Electronics-374151?style=for-the-badge)](#)
+[![Tech3](https://img.shields.io/badge/-Bench_Measurement-15803D?style=for-the-badge)](#)
+
+</div>
+
+---
+
 # 05 — Industrial Electronics Coursework — 7 Lab & Practical Works
 
 > Praktiskie un laboratorijas darbi kursā *Rūpnieciskās elektroniskās iekārtas*
@@ -88,58 +102,3 @@ Quantified the sensor non-linearity under loading — a real-world issue when in
 | Folder | What's inside |
 |---|---|
 | `psim_sources/` | **Editable PSIM circuit files** (`.psimsch`) for all simulations — open and modify in PSIM 2025 or newer |
-| `images/` | High-resolution figures used in this README |
-
----
-
-## How to view the materials
-
-### The PDFs
-All 7 lab/practical reports are PDF — open in any viewer. Each has a consistent structure:
-1. Task definition (what the lab is asking)
-2. Theoretical background
-3. PSIM simulation (with oscillograms)
-4. Bench measurement (instrument photos + numerical readings)
-5. Comparison & analysis
-6. Conclusions
-
-### The PSIM source files
-The `psim_sources/` folder contains the editable `.psimsch` schematic files used for each topic.
-
-**Software:** PSIM 2025 (or PSIM 11+). PSIM is widely used in industry and academia for power electronics simulation. Demo / student licenses are available.
-
-**Open:** PSIM → *File → Open* → select `.psimsch` file. The schematic loads with all components, sources and measurement probes pre-placed.
-
-**Run:** *Simulate → Run Simulation* (F8). The simulator computes the voltages and currents; results show as oscillograms in the SIMVIEW window.
-
-**Modify:** All components are editable — change a resistor value, swap a diode model, change the firing angle of a thyristor — and re-run to see the effect.
-
----
-
-## Skills demonstrated
-
-- **Analog electronics** — diode rectification topologies, Zener regulation, voltage doublers/multipliers
-- **Power electronics** — thyristor-controlled rectifiers, firing-angle control
-- **Op-amp circuits** — inverting, differential configurations, gain calculation
-- **ADC/DAC fundamentals**
-- **Sensor characterization** — resistive potentiometric, loading effects
-- **PSIM circuit simulation**
-- **Bench measurement** — oscilloscope, voltmeter, signal generator
-- **Three-way validation** — analytical / simulated / measured cross-check on every result
-
----
-
-## Latvian summary (LV)
-
-Šis ir septiņu laboratorijas un praktisko darbu komplekts kursā *Rūpnieciskās elektroniskās iekārtas* (RTU EEF, 2024./2025.). Darbi aptver rūpnieciskās elektronikas pamatus:
-
-1. **Diožu lietojumi taisngriešanai** — p-n vs Šotki diodes, vienfāzes pusperioda un tilta taisngrieži
-2. **Diožu lietojumi sprieguma daudzkāršošanai un stabilizācijai** — sprieguma divkāršotājs (u_in_amp = 20,25 V → u_out = 40,5 V), Zenera stabilizators
-3. **Spriegumu regulatori** — vienfāzes vadāmais taisngriezis ar tiristoru, regulēšanas leņķis α = 0…180°
-4. **Lineārie kompensācijas tipa sprieguma stabilizatori** — U_in 15 V → U_out 10 V
-5. **Pastiprinātāji, ACP/CAP** — operacionālie pastiprinātāji, invertējošais slēgums, A = R2/R1
-6. **Sensori** — rezistīvie potenciometriskie sensori, raksturlīkne ar/bez slodzes
-
-Visi darbi apvienoja analītiskos aprēķinus, PSIM modelēšanu un stenda mērījumus — trīsdaļīgs apstiprinājums katrai shēmai.
-
-Tieši šis kurss veido manas pašreizējās *Elektronikas regulētāja* darba vietas Latvijas Finierī intelektuālo bāzi.

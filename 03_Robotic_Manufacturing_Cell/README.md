@@ -1,3 +1,17 @@
+<div align="center">
+
+[← back to portfolio](../README.md)
+
+# 🏭 Project 03
+
+[![Tech1](https://img.shields.io/badge/-MAB373-FF0000?style=for-the-badge)](#)
+[![Tech2](https://img.shields.io/badge/-Industrial_Layout-374151?style=for-the-badge)](#)
+[![Tech3](https://img.shields.io/badge/-Mass_Production-15803D?style=for-the-badge)](#)
+
+</div>
+
+---
+
 # 03 — RTK 4.7: Robotic Manufacturing Cell Design
 
 > Robotizēta tehnoloģiskā kompleksa izstrāde detaļas Nr. 4 automātiskai apstrādei
@@ -123,65 +137,4 @@ The full course work (~7 300 words, in `RTK_kursa_darbs_FULL.docx`) covers:
 3. Workpiece (sagatave) selection — solid bar vs forging trade-off
 4. Technological route — operation sequence + setup choice
 5. Basing and clamping strategy with datum A as reference
-6. RTK equipment selection (robot model, 2× turn-mill CNC, magazine, separator)
-7. **Workpiece feeding & orientation device design and sizing calculation**
-8. Tool selection (carbide inserts for C45, coolant supply)
-9. **Cutting-regime calculation** — speeds, feeds, depths per pass per operation
-10. Auxiliary-time and RTK takt-time calculation
-11. **RTK cyclogram** — full time-sync chart (see Fig. 4)
-12. Equipment layout — the floor plan (see Fig. 3)
-13. Automatic control, sensors and safety system
-14. Chip removal system + cooling supply
-15. RTK variant comparison (this 2-CNC vs single-CNC alternatives) and final selection
-16. Final conclusions
-
----
-
-## Files in this folder
-
-| File | Size | What's inside | How to view |
-|---|---:|---|---|
-| `RTK_kursa_darbs_FULL.docx` | 36 KB | **Full course work** — 16 sections, ~7 300 words, LV. All tables (part stages, cutting regimes, equipment list, sensor list), calculations and conclusions. The primary reference document. | Microsoft Word, LibreOffice, Google Docs |
-| `MAB373_pilna_versija.docx` | 49 KB | Alternative full version with additional formatting | Word/LibreOffice |
-| `01_Detalas_rasejums.pdf` | 225 KB | **Part drawing** — A4, scale 1:1, Detail Nr. 4.7 with all dimensions, tolerances, chamfers, surface finish | PDF viewer |
-| `02_Operaciju_skices.pdf` | 316 KB | **Operation sketches** — A4, multi-pass turning, chamfering, threading operations | PDF viewer |
-| `03_RTK_planojums.pdf` | 379 KB | **Cell layout** — A2 sheet at scale 1:30, all 13 numbered positions, dimensions, robot reach circles, safety perimeter | PDF viewer |
-| `04_RTK_planojums_ar_ciklogrammu.pdf` | 380 KB | **Layout with cyclogram** — same layout sheet with the time-synchronisation chart overlay | PDF viewer |
-| `images/` | — | Extracted figures used in this README | — |
-
----
-
-## How to read the package
-
-For a recruiter or technical reviewer:
-
-1. Start with `01_Detalas_rasejums.pdf` — understand what part is being made
-2. Read sections 1–6 of `RTK_kursa_darbs_FULL.docx` — the engineering reasoning
-3. Look at `02_Operaciju_skices.pdf` to follow the machining route
-4. Open `03_RTK_planojums.pdf` to see the floor plan
-5. The cyclogram in `04_RTK_planojums_ar_ciklogrammu.pdf` is where the design pays off — it visually proves the cell hits its throughput target
-
-For a deeper read: section 9 (cutting regimes) shows the per-operation calculations; section 11 (cyclogram) shows the synchronization logic; section 13 covers the safety/sensor approach.
-
----
-
-## Skills demonstrated
-
-- **Robotic cell design** — equipment selection, layout planning, reach analysis
-- **CNC turn-mill technological-route planning** — multi-setup routing, parallel-machine flow
-- **Cutting-regime calculation** — speeds, feeds, depths per material (C45 carbide)
-- **Cycle-time and takt analysis** for mass production
-- **Industrial floor-plan layout** — scaled drawings, dimensioning, safety zones
-- **Sensor / safety integration**
-- **Workpiece feeding system sizing**
-- **Technical drawing per ISO conventions** — A2/A3/A4 sheets, title blocks, scale 1:30 / 1:1
-
----
-
-## Latvian summary (LV)
-
-Šis ir kursa darbs *MAB373 — Detaļu orientēšanas un padeves iekārtas* (variants 4.7), kurā izstrādāts pilns robotizētais tehnoloģiskais komplekss (RTK) Detaļas Nr. 4 (Ø25/M30 vārpsta no tērauda C45) sērijveida ražošanai — 180 000 gab./gadā.
-
-Komplekss aptver 6,5 × 9,5 m un satur 13 pozīcijas: robotu, divus turn-mill CNC centrus, magazīnu, atdalītāju, skaidu konveijierus, kontroles staciju, marķēšanas iekārtu, gatavo detaļu paleti, brāķa kasti un PLC vadības skapi. Galvenais inženiertehniskais izaicinājums — sinhronizēt robotu, abus CNC un palīgstacijas vienā nepārtrauktā ciklā, ko apliecina ciklogramma uz lapas A2.
-
-Pilna 16 sadaļu kursa dokumentācija failā `RTK_kursa_darbs_FULL.docx`, grafiskās daļas — detaļas rasējums, operāciju skices, kompleksa plānojums un plānojums ar ciklogrammu — atsevišķās PDF lapās.
+6. RTK 

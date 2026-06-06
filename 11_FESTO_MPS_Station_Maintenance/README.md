@@ -1,3 +1,17 @@
+<div align="center">
+
+[← back to portfolio](../README.md)
+
+# 🏁 Project 11
+
+[![Tech1](https://img.shields.io/badge/-EPLAN-005CA9?style=for-the-badge)](#)
+[![Tech2](https://img.shields.io/badge/-Festo-0091D5?style=for-the-badge)](#)
+[![Tech3](https://img.shields.io/badge/-Pneumatics-374151?style=for-the-badge)](#)
+
+</div>
+
+---
+
 # 11 — FESTO MPS Station: Repair, EPLAN Schematics & Documentation 🏁
 
 > Reālas Festo MPS izglītības stacijas remonts, diagnostika un pilnas tehniskās dokumentācijas izveide
@@ -137,82 +151,4 @@ The electrical schematic captures:
 
 ### 4. Technical documentation handbook (~2 600 words, LV)
 
-The `FESTO_MPS_full_documentation.docx` is the **handbook** future technicians and students will use. Structure:
-
-1. **Zone legend** — what the 4 zones are, what they do
-2. **Class legend** — what the ID letters mean
-3. **Tagging convention** — `[Zone][Class][Number]` with full examples
-4. **Per-zone component tables** — ID, name, model/series, type, supply, function/location for every sensor, actuator, valve, motor and switch in the cell
-5. **PLC I/O map** — sensor → input pin / valve → output pin assignments
-6. **Pneumatic map** — valve → actuator routing in tabular form
-7. **Alarm / diagnostic list** — failure modes and recovery procedures ("Nelaimes gadījumi un diagnostika")
-8. **Cycle sequence logic** — the closed-loop logic between zones
-
-The alarm list is the operational payoff — when something goes wrong, the technician reads the handbook and knows which alarm corresponds to which failure mode and what the recovery procedure is.
-
----
-
-## Files in this folder
-
-| File / folder | What's inside | How to view |
-|---|---|---|
-| `FESTO_MPS_full_documentation.docx` | The **handbook** — ~2 600 words LV, all zone tables, ID legends, PLC I/O map, pneumatic map, alarm list, cycle logic | Word/LibreOffice |
-| `pneumatic_schemes/Pnevmo_1.pdf`–`Pnevmo_4.pdf` | Four pneumatic schematic sheets — one per zone | PDF viewer |
-| `electrical_PLC/Festo_electrical_wiring.pdf` | Main electrical wiring (EPLAN) | PDF viewer |
-| `electrical_PLC/PLC_main.pdf` | Main PLC schematic | PDF viewer |
-| `electrical_PLC/PLC_for_Denis_Kashin.pdf` | PLC subsystem co-prepared with Denis Kashin | PDF viewer |
-| `electrical_PLC/1OP1_4OP1_for_Denis_Kashin.pdf` | Sensor sub-document for the collaboration handoff | PDF viewer |
-| `images/` | High-resolution figures used in this README | — |
-
----
-
-## How to use the package
-
-For a future maintainer:
-1. **Open the handbook** (`.docx`) → read the zone legend, class legend, tagging convention (first 3 pages)
-2. **Open the pneumatic sheets** (`Pnevmo_1..4.pdf`) for the zone you're working on
-3. **Open the electrical wiring** to trace power and I/O
-4. **Open the main PLC schematic** to see how the I/O maps to PLC pins
-5. When a fault occurs, **check the alarm list** in the handbook — match the alarm to a diagnostic procedure
-
-For a hiring reviewer:
-- The handbook + the 6+ schematic sheets demonstrate full **industrial-maintenance documentation discipline**
-- The tagging convention shows **systems thinking** — making the handoff usable
-- The team collaboration with Denis Kashin shows **cross-discipline coordination** on a real engineering project
-
----
-
-## Skills demonstrated
-
-- **Industrial equipment service** — diagnosing and repairing a real production-style training station
-- **Pneumatic system analysis** — tracing valves, manifolds, actuators across 4 zones
-- **Electrical / PLC wiring documentation in EPLAN** — power, sensor and actuator wiring drawn from scratch
-- **Festo component selection and identification** — DSR rotary drives, DSNU/DNC cylinders, VUVG solenoid valves, VAL vacuum blocks, GRLA flow regulators
-- **Sensor types** — inductive PNP, optical, magnetic reed, limit switches
-- **Structured tagging convention** for plant equipment — `[Zone][Class][Number]`
-- **Failure-mode analysis and alarm-table authoring**
-- **Cross-discipline collaboration** — worked alongside Denis Kashin on the PLC subsystems
-- **Technical writing in Latvian** — handbook for future technicians
-
----
-
-## Latvian summary (LV)
-
-Šis ir flagship projekts portfelī — reālas Festo Modulārās Ražošanas Sistēmas (MPS) izglītības stacijas remonts un pilna tehniskās dokumentācijas izveide RTU. Šī ir vienīgais projekts manā portfelī, kurā:
-
-- **Reāla salauzta iekārta** tika atjaunota darbībā
-- **Reāli EPLAN shēmu zīmējumi** tika izveidoti no nulles (jo dokumentācijas iepriekš nebija)
-- **Reāla apkalpošanas rokasgrāmata** tika sagatavota turpmākajiem tehniķiem
-- **Reāla komandas sadarbība** ar kolēģi Denisu Kašinu uz PLC apakšsistēmu
-
-**Stacija aptver 4 zonas** ar pilnu Festo standarta komponentu sortimentu — DSR rotācijas piedziņas, DSNU/DNC cilindri, VUVG solenoīda vārsti, VAL vakuuma bloki, GRLA droseļvārsti, induktīvie/optiskie/magnētiskie sensori.
-
-**Galvenais metodoloģiskais ieguldījums** — pielāgota marķēšanas sistēma `[Zona][Klase][Nē]` (piem. `2P3.1` = Zona 2, magnētiskais pozīcijas sensors, komplekts 3 kanāls 1) — kas padara dokumentāciju tieši izmantojamu nākotnes tehniķiem.
-
-**Nodevumi:**
-- Pilnās EPLAN elektriskās shēmas (galvenais vadu shēmas attēls)
-- Četras pneimatikas shēmu lapas (pa vienai katrai zonai)
-- PLC vadu shēmas (galvenā + apakšsistēma kopā ar Denisu Kašinu)
-- ~2 600 vārdu tehniskā rokasgrāmata ar zonu un klases leģendām, PLC I/O karti, pneimatikas karti, **trauksmes saraksta diagnostiku** un cikla loģiku
-
-Šis projekts ir vistuvākais analogs reālajai industriālā aprīkojuma apkalpošanai — un tieši atbilst manai pašreizējai *Elektronikas regulētāja* darba lomai Latvijas Finierī.
+The `FESTO_MPS_full_documentation.docx` is the **handbook** future technicians and students

@@ -1,3 +1,17 @@
+<div align="center">
+
+[← back to portfolio](../README.md)
+
+# 📊 Project 08
+
+[![Tech1](https://img.shields.io/badge/-Jupyter-F37626?style=for-the-badge)](#)
+[![Tech2](https://img.shields.io/badge/-NumPy-013243?style=for-the-badge)](#)
+[![Tech3](https://img.shields.io/badge/-LaTeX-008080?style=for-the-badge)](#)
+
+</div>
+
+---
+
 # 08 — Flat Belt Drive Design in Jupyter
 
 > Plakansiksnas pārvada aprēķins — mašīnu elementu aprēķins Python vidē
@@ -62,142 +76,4 @@ n_m = 3000                # motora apgriezieni (motor speed, rpm)
 P   = 500                 # motora jauda (motor power, W)
 n_s = 1000                # dzenošā skriemeļa apgriezieni (driven pulley, rpm)
 C   = 1.5                 # asu attālums (axis distance, m)
-Ks  = 1.15                # darba režīma koeficients (service factor)
-F_un = 36 * 1000          # siksnas nominālais aploces spēks (N/m belt width)
-t = 3.4 / 1000            # siksnas biezums (belt thickness, m)
-m_i = 3.5                 # siksnas īpatnējā masa (belt mass per meter, kg/m)
-```
-
-**Belt choice:** Habasit A3 general-purpose flat belt
-- μ = 0.495 (working-surface friction coefficient — from manufacturer's brochure)
-- t = 3.4 mm thickness
-- m_i = 3.5 kg/m specific mass
-- F_un = 36 kN/m nominal traction per meter of belt width
-
-The drive ratio target u = n_m / n_s = 3.0 (motor 3000 rpm → driven shaft 1000 rpm).
-
----
-
-## The calculation chain — 21 code cells in sequence
-
-Each code cell computes one quantity from the previous ones. Selected highlights:
-
-### Angular velocity of driver pulley
-```math
-ω_d = (2 · π · n_m) / 60
-```
-```python
-import numpy as np
-omega_d = (2 * np.pi * n_m) / 60      # rad/s
-```
-
-### Pulley diameters & wrap angle
-Computed from drive ratio + axis distance, then verified against the limits for the belt material.
-
-### Belt linear velocity
-```math
-v = ω_d · (d/2)
-```
-The standard kinematic relation — needed for centrifugal force calculation.
-
-### Tangential, centrifugal and pre-tension forces
-
-```math
-F_u = P / v                  (tangential force, transmitted)
-F_c = m_i · v²              (centrifugal, acts on both sides)
-F_i = pre-tension force     (chosen to satisfy slip-free Euler equation with friction coefficient μ and wrap angle β)
-```
-
-### Tight-side and slack-side forces
-```math
-F_1 = F_i + F_c + F_u/2     (tight side)
-F_2 = F_1 - F_u             (slack side)
-```
-
-### Resultant force on shafts (for bearing design)
-```math
-F_ω = F_1 + F_2 · sin(β/2) + 2 · F_c
-```
-
-This is the force the shafts must support — what the bearings have to be sized for.
-
-### Effective belt length
-```math
-L_eff = 2C · sin(β/2) + π/2 · (d+D+4·t/2 + ((D-d)·(180-β)/180))
-```
-
-The full equation accounts for both straight runs and the curved sections wrapping around the pulleys, with a thickness correction.
-
-### Belt elongation & required take-up
-```math
-e_0 = (F_i + F_c) / (b · K_1)
-X_e = (L_eff · e_0) / (2 · 100)
-```
-
-Where `K_1` is the belt's specific stiffness factor and `b` is belt width.
-The take-up `X_e` is the linear adjustment range the tensioning mechanism must provide.
-
----
-
-## Files in this folder
-
-| File | Size | What's inside | How to view |
-|---|---:|---|---|
-| `Plakansiksnas_parvada_aprekins.ipynb` | 324 KB | **Main notebook** — 45 cells, full design from inputs to take-up; LaTeX derivations + NumPy code; figures of the drive scheme and the Habasit A3 catalog page | **Jupyter Lab** or **Jupyter Notebook** |
-| `Plakansiksnas_v31.ipynb` | 324 KB | Secondary version (slight iteration) | Same — Jupyter |
-| `images/` | — | High-resolution figures used in this README | — |
-
----
-
-## How to open & run
-
-### Setup (one-time)
-```bash
-pip install jupyter numpy
-```
-
-### Open and run
-```bash
-cd 08_Belt_Drive_Calculation_Jupyter
-jupyter notebook Plakansiksnas_parvada_aprekins.ipynb
-```
-
-This opens the notebook in your browser. Run cells in order with **Shift+Enter** — each markdown cell shows the derivation; each code cell computes the next quantity and prints it.
-
-### Change a design parameter
-Edit cell 5 (the inputs cell) — for example change `n_m = 3000` to `n_m = 2800` — then **Kernel → Restart & Run All** to re-compute everything downstream. All formulas, intermediate values and the final take-up update consistently.
-
----
-
-## Skills demonstrated
-
-- **Mechanical-element design** — flat belt power transmission
-- **Belt-drive theory** — pre-tension, centrifugal, tight/slack-side forces, wrap-angle correction
-- **Bearing-load calculation** — resultant force from belt on shafts
-- **LaTeX-documented engineering math** — every formula shown before its code
-- **NumPy numerical computation**
-- **Jupyter as an engineering notebook** — reproducible, parameter-driven calculation that re-runs cleanly
-- **Manufacturer-catalog reading** — extracted Habasit A3 parameters (μ, t, m_i, F_un) and integrated into design
-
----
-
-## Latvian summary (LV)
-
-Šis projekts ir plakansiksnas pārvada pilns aprēķins divām horizontāli un paralēli novietotām vārpstām, kas realizēts kā Jupyter Notebook ar NumPy. Notebook satur 45 šūnas — 21 koda + 23 markdown ar LaTeX formulām, kur katra formula ir parādīta *pirms* tās aprēķina.
-
-**Ieejas dati:**
-- n_m = 3000 rpm (motora apgriezieni)
-- P = 500 W (motora jauda)
-- n_s = 1000 rpm (dzenamais skriemelis)
-- C = 1,5 m (asu attālums)
-- Siksna: Habasit A3 vispārēja pielietojuma (μ = 0,495, t = 3,4 mm, m_i = 3,5 kg/m, F_un = 36 kN/m)
-
-**Aprēķinātie izejas dati:**
-- Dzenošā skriemeļa leņķiskais ātrums ω_d
-- Siksnas parametri: veids, platums, biezums
-- Spriegošanas spēks F_i, centrbēdzes spēks F_c
-- Spēki abām pusēm F_1, F_2 un rezultējošais spēks uz vārpstām F_ω (gultņu izvēlei)
-- Siksnas efektīvais garums L_eff (ar liekuma korekciju)
-- Nepieciešamā siksnas savilkšana X_e
-
-Notebook ir parametrizēta — mainot vienu ievades vērtību (piem. motora apgriezienus) un izpildot atkārtoti, visi atvasinātie lielumi tiek pārrēķināti automātiski.
+Ks  = 1.15                # darba režīma koeficients (se
