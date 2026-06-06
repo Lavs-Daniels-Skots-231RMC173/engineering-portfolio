@@ -1,87 +1,187 @@
-# 03 — Robotic Manufacturing Cell (RTK, Variant 4.7)
+# 03 — RTK 4.7: Robotic Manufacturing Cell Design
 
-> Robotizētais Tehnoloģiskais Komplekss — pilna ražošanas ciklu projektēšana
-> Robotic Technological Complex — full machining-cell design
+> Robotizēta tehnoloģiskā kompleksa izstrāde detaļas Nr. 4 automātiskai apstrādei
+> End-to-end design of a robotic machining cell for mass production (180 000 pcs/year)
 
-**Context:** RTU studiju projekts, kurs *MAB373 — Detaļu orientēšanas un padeves iekārtas*, RMCE01, 3. kurss, 2026
-**Variant:** 4.7 (Detal Nr. 4, Tērauds C45)
-**Annual production volume:** N = 180 000 pcs/year (mass production)
+**Context** RTU course work · *MAB373 — Detaļu orientēšanas un padeves iekārtas* (Part Orientation & Feeding Devices) · RMCE01 · 3rd year · 2026
+**Variant** 4.7 (Detail Nr. 4, steel C45)
+**Production volume** N = 180 000 pcs/year (mass production)
 
 ---
 
-## EN — for GitHub README / EN CV
+## The brief
 
-**RTK — Robotic Manufacturing Cell, Variant 4.7 (2026)**
+Design a complete robotic technological cell (RTK = *Robotizētais Tehnoloģiskais Komplekss*) to manufacture a specified shaft component automatically. The design must cover:
 
-End-to-end design of a robotic machining cell to produce a stepped shaft component (steel C45) in mass production (180 000 pcs/year). The course work covers the full engineering chain — from part analysis to cell commissioning logic — across 16 documented sections plus 4 graphical sheets.
+- The full **technological route** from blank stock to finished part
+- **Robot + CNC layout** with reach circles and safety zones
+- **Workpiece feeding & orientation device** sized to keep the cell fed
+- **Cutting regimes** computed per tool/operation
+- **Cycle and takt-time** calculation
+- **Cyclogram** synchronizing robot, both CNCs, magazine, separator and aux stations
+- **Safety, sensors and chip removal** integration
+- Comparison of design variants and selection
 
-**Part designed for production**
-- Stepped shaft, L = 100 mm; stages L1…L5 = 40/32/32/20/13 mm
-- Outer Ø25, M30 external thread, Ø18 internal axial bore, Ø8×13 right-side axial bore, Ø5 transverse hole
-- 2×45° and 3×45° chamfers, Ra 3.2, 0.01 mm tolerance against datum A
+The work is documented across 16 sections + 4 graphical sheets (A2, A3 formats).
 
-**Engineering scope (full course work, 16 sections)**
+---
+
+## The part — stepped shaft, steel C45
+
+A stepped rotational-symmetry shaft with the following features:
+- **Total length** L = 100 mm
+- **Stage lengths** L1 = 40, L2 = 32, L3 = 32, L4 = 20, L5 = 13 mm
+- **External diameter** Ø25 (cylindrical base/seat)
+- **External thread** M30
+- **Internal axial bore** Ø18 (left side, 0.6·M30)
+- **Axial bore right** Ø8 × 13 mm
+- **Cross-bore** Ø5
+- **Chamfers** 2×45° and 3×45°
+- **Surface roughness** Ra 3.2
+- **Tolerance** 0.01 mm to datum A
+- **Material** Steel C45 — carbide tooling required, with coolant supply
+
+The geometry is well-suited to a **CNC turn-mill centre** (turning + cross-bore via C-axis driven tool) — no separate milling station needed.
+
+![Part drawing](images/rtk_part_hi-1.png)
+
+*Fig. 1 — Detail Nr. 4.7 part drawing: Ø25 / M30 stepped shaft, steel C45, Ra 3.2, runout 0.01 │ A, total length 100 mm*
+
+---
+
+## Technological route — turn-mill machining sequence
+
+The part is machined on a **CNC turn-mill centre** in two setups:
+
+![Operation sketches](images/rtk_ops_hi-1.png)
+
+*Fig. 2 — Operation sketches: each multi-pass turning + chamfering + thread cutting operation*
+
+Operations:
+1. **Setup A** (gripping right end)
+   - Face the left end + drill Ø18 axial bore
+   - Rough-turn the Ø25 cylindrical stages
+   - Finish-turn to Ra 3.2
+   - Chamfer 2×45° (left transitions)
+2. **Setup B** (gripping left, reversed)
+   - Face the right end + drill Ø8 axial bore
+   - Drive cross-bore Ø5 (C-axis + driven tool)
+   - Cut M30 thread
+   - Chamfer 3×45° (right transitions)
+
+Two **identical turn-mill centres (CNC-V1, CNC-V2)** are used in parallel — one does Setup A while the other does Setup B on the previous part, giving a continuous flow.
+
+---
+
+## Cell layout — 6.5 × 9.5 m, 13 positions
+
+![RTK layout](images/rtk_layout_hi-1.png)
+
+*Fig. 3 — RTK cell floor plan (scale 1:30, A2 sheet): 13 numbered positions, 6.5 × 9.5 m footprint, robot Ø600 inner / Ø400 outer reach circles*
+
+| # | Code | Element | Role |
+|---|---|---|---|
+| 1 | DN | Drošības nožogojums | Safety fence (perimeter) |
+| 2 | SM | Sagatavju magazīna | Workpiece magazine |
+| 3 | SR | Slīdes rene 30 | Feeding slide |
+| 4 | AT | Atdalītājs / padevējs | Singulator/separator |
+| 5 | R | Robots | Industrial robot |
+| 6 | CNC-V1 | Turn-mill centre | First CNC |
+| 7 | CNC-V2 | Turn-mill centre | Second CNC |
+| 8 | SK1/SK2 | Skaidu konveijieri | Chip conveyors |
+| 9 | AKS | Kontroles stacija | Inspection station |
+| 10 | M | Marķēšanas iekārta | Marking machine |
+| 11 | GP | Gatavo detaļu palete | Finished-parts pallet |
+| 12 | BK | Brāķa kaste | Reject bin |
+| 13 | PLC/HMI | Vadības skapis | Control cabinet |
+
+The robot reach is laid out so its **outer reach circle (Ø600)** covers both CNCs, the inspection station and the magazine outlet — keeping cycle time short. Inner reach circle (Ø400) covers the pallet and reject zone.
+
+---
+
+## Cyclogram — keeping robot, CNCs and aux stations in sync
+
+![RTK layout with cyclogram](images/rtk_cycle_hi-1.png)
+
+*Fig. 4 — Same layout with the cyclogram overlay: a time-synchronised chart showing what robot, CNC-V1, CNC-V2, magazine, separator, inspection and marking are doing across one full production cycle*
+
+The cyclogram is the design's heart: it shows that:
+- CNCs run continuously (one machining while the other is being loaded)
+- The robot's cycle is dominated by *waiting* for the CNCs (machining time > robot transfer time) — confirming the cell is **CNC-bound**, not robot-bound
+- The marking and inspection stations operate in parallel with CNC machining, off the critical path
+
+Cycle time and takt are computed from the cyclogram for the target 180 000 pcs/year throughput.
+
+---
+
+## Engineering scope — 16 sections of the course work
+
+The full course work (~7 300 words, in `RTK_kursa_darbs_FULL.docx`) covers:
+
 1. Initial data & constructive/technological analysis of the part
-2. Production-type determination (mass production from N = 180 000 pcs/yr)
-3. Workpiece (sagatave) selection
-4. Technological route — turn-mill machining sequence
-5. Basing and clamping strategy (datum A reference)
-6. RTK equipment selection (robot + 2× turn-mill CNC, magazine, separator)
-7. Workpiece feeding & orientation device — design and sizing calculation
-8. Tools and machining operation selection (carbide for C45, with coolant)
-9. **Cutting-regime calculation** — speeds, feeds, depths per pass
+2. Production-type determination (180 000 pcs/yr → mass production)
+3. Workpiece (sagatave) selection — solid bar vs forging trade-off
+4. Technological route — operation sequence + setup choice
+5. Basing and clamping strategy with datum A as reference
+6. RTK equipment selection (robot model, 2× turn-mill CNC, magazine, separator)
+7. **Workpiece feeding & orientation device design and sizing calculation**
+8. Tool selection (carbide inserts for C45, coolant supply)
+9. **Cutting-regime calculation** — speeds, feeds, depths per pass per operation
 10. Auxiliary-time and RTK takt-time calculation
-11. **RTK cyclogram** — time-synchronized chart of robot/CNC/auxiliary cycles
-12. Equipment layout — 6500 × 9500 mm floor plan, 13 positions:
-    - Safety fence (DN), parts magazine (SM), slide rail (SR-30), separator/feeder (AT)
-    - Industrial robot (R) — Ø600 / Ø400 reach circles laid out
-    - Two turn-mill CNC centers (CNC-V1, CNC-V2)
-    - Chip conveyors (SK1/SK2), inspection station (AKS), marking machine (M)
-    - Finished-parts pallet (GP), reject bin (BK), PLC/HMI control cabinet
-13. **Automatic control, sensors and safety**
-14. Chip removal and cooling system
-15. RTK variant comparison and final selection
-16. Conclusions
-
-**Graphical deliverables**
-- Part drawing (Detal Nr. 4.7, scale 1:1)
-- Operation sketches with all `Pāreja` (pass) layouts
-- RTK floor plan (scale 1:30, A2)
-- Plan with cyclogram
-
-**Skills demonstrated:** robotic cell design · CNC turn-mill technological-route planning · cutting-regime calculation · cycle-time and takt analysis for mass production · industrial floor-plan layout · sensor / safety integration · workpiece feeding system sizing · technical drawing per ISO conventions
+11. **RTK cyclogram** — full time-sync chart (see Fig. 4)
+12. Equipment layout — the floor plan (see Fig. 3)
+13. Automatic control, sensors and safety system
+14. Chip removal system + cooling supply
+15. RTK variant comparison (this 2-CNC vs single-CNC alternatives) and final selection
+16. Final conclusions
 
 ---
 
-## LV — for LV CV
+## Files in this folder
 
-**RTK — Robotizētais Tehnoloģiskais Komplekss, 4.7. variants (2026)**
-
-Izstrādāts pilns robotizēts apstrādes komplekss Ø30 vārpstas detaļas ar M30 vītni ražošanai (Tērauds C45). Projekts aptver visu inženiertehnisko ķēdi: detaļas rasējums → operāciju secība → kompleksa plānojums → cikla sinhronizācija.
-
-**Apjoms**
-- **Detaļas rasējums** — Ø30/Ø25/Ø18, vītne M30, fāzes 2×45° / 3×45°, Ra 3,2, sišana 0,01 mm pret bāzi A, garums 100 mm.
-- **Operāciju skices** — virpošanas pārejas katram diametra posmam, fāzēšana, vītnes griešana.
-- **RTK plānojums (M 1:30)** — 6500 × 9500 mm grīdas plāns ar 13 numurētām pozīcijām: drošības nožogojums, sagatavju magazīna, slīdes rene, atdalītājs/padevējs, rūpnieciskais robots (ar Ø600/Ø400 darba zonām), divi turn-mill CNC centri, skaidu konveijeri, kontroles stacija, marķēšanas iekārta, gatavo detaļu palete, brāķa kaste, PLC/HMI vadības skapis.
-- **Ciklogramma** — robota, CNC centru un palīgstaciju sinhronizācija.
-
-**Prasmes:** robotizētu šūnu projektēšana · CNC turn-mill operāciju plānošana · ražošanas grīdas plānojums · cikla laika analīze · drošības zonu plānošana · tehniskie rasējumi
+| File | Size | What's inside | How to view |
+|---|---:|---|---|
+| `RTK_kursa_darbs_FULL.docx` | 36 KB | **Full course work** — 16 sections, ~7 300 words, LV. All tables (part stages, cutting regimes, equipment list, sensor list), calculations and conclusions. The primary reference document. | Microsoft Word, LibreOffice, Google Docs |
+| `MAB373_pilna_versija.docx` | 49 KB | Alternative full version with additional formatting | Word/LibreOffice |
+| `01_Detalas_rasejums.pdf` | 225 KB | **Part drawing** — A4, scale 1:1, Detail Nr. 4.7 with all dimensions, tolerances, chamfers, surface finish | PDF viewer |
+| `02_Operaciju_skices.pdf` | 316 KB | **Operation sketches** — A4, multi-pass turning, chamfering, threading operations | PDF viewer |
+| `03_RTK_planojums.pdf` | 379 KB | **Cell layout** — A2 sheet at scale 1:30, all 13 numbered positions, dimensions, robot reach circles, safety perimeter | PDF viewer |
+| `04_RTK_planojums_ar_ciklogrammu.pdf` | 380 KB | **Layout with cyclogram** — same layout sheet with the time-synchronisation chart overlay | PDF viewer |
+| `images/` | — | Extracted figures used in this README | — |
 
 ---
 
-## Files in this project folder
-**Course work report (16-section technical document, ~7 300 words):**
-- `RTK_kursa_darbs_FULL.docx` — full course work
-- `MAB373_pilna_versija.docx` — alternate version
+## How to read the package
 
-**Graphical sheets:**
-- `01_Detalas_rasejums.pdf` — part drawing (Detal Nr. 4.7, steel C45, scale 1:1)
-- `02_Operaciju_skices.pdf` — operation sketches (turning, chamfering, threading passes)
-- `03_RTK_planojums.pdf` — cell layout (scale 1:30, A2)
-- `04_RTK_planojums_ar_ciklogrammu.pdf` — layout + cyclogram
+For a recruiter or technical reviewer:
 
-## CV bullet (short, EN)
-> *Designed a robotic machining cell (RTK, 6.5 × 9.5 m, 13-position layout) for mass production of an M30 stepped shaft in C45 steel — 180 000 pcs/year — including technological route, cutting-regime calculation, takt-time analysis, cyclogram and safety/sensor integration (RTU MAB373 course work).*
+1. Start with `01_Detalas_rasejums.pdf` — understand what part is being made
+2. Read sections 1–6 of `RTK_kursa_darbs_FULL.docx` — the engineering reasoning
+3. Look at `02_Operaciju_skices.pdf` to follow the machining route
+4. Open `03_RTK_planojums.pdf` to see the floor plan
+5. The cyclogram in `04_RTK_planojums_ar_ciklogrammu.pdf` is where the design pays off — it visually proves the cell hits its throughput target
 
-## CV bullet (short, LV)
-> *Izstrādāts robotizētais apstrādes komplekss (RTK, 6,5 × 9,5 m, 13 pozīciju plānojums) M30 vārpstveida detaļas (C45 tērauds) sērijveida ražošanai — 180 000 gab./gadā — ar tehnoloģiskā maršruta, griešanas režīmu un takta laika aprēķiniem, ciklogrammu un sensoru/drošības integrāciju (RTU MAB373 kursa darbs).*
+For a deeper read: section 9 (cutting regimes) shows the per-operation calculations; section 11 (cyclogram) shows the synchronization logic; section 13 covers the safety/sensor approach.
+
+---
+
+## Skills demonstrated
+
+- **Robotic cell design** — equipment selection, layout planning, reach analysis
+- **CNC turn-mill technological-route planning** — multi-setup routing, parallel-machine flow
+- **Cutting-regime calculation** — speeds, feeds, depths per material (C45 carbide)
+- **Cycle-time and takt analysis** for mass production
+- **Industrial floor-plan layout** — scaled drawings, dimensioning, safety zones
+- **Sensor / safety integration**
+- **Workpiece feeding system sizing**
+- **Technical drawing per ISO conventions** — A2/A3/A4 sheets, title blocks, scale 1:30 / 1:1
+
+---
+
+## Latvian summary (LV)
+
+Šis ir kursa darbs *MAB373 — Detaļu orientēšanas un padeves iekārtas* (variants 4.7), kurā izstrādāts pilns robotizētais tehnoloģiskais komplekss (RTK) Detaļas Nr. 4 (Ø25/M30 vārpsta no tērauda C45) sērijveida ražošanai — 180 000 gab./gadā.
+
+Komplekss aptver 6,5 × 9,5 m un satur 13 pozīcijas: robotu, divus turn-mill CNC centrus, magazīnu, atdalītāju, skaidu konveijierus, kontroles staciju, marķēšanas iekārtu, gatavo detaļu paleti, brāķa kasti un PLC vadības skapi. Galvenais inženiertehniskais izaicinājums — sinhronizēt robotu, abus CNC un palīgstacijas vienā nepārtrauktā ciklā, ko apliecina ciklogramma uz lapas A2.
+
+Pilna 16 sadaļu kursa dokumentācija failā `RTK_kursa_darbs_FULL.docx`, grafiskās daļas — detaļas rasējums, operāciju skices, kompleksa plānojums un plānojums ar ciklogrammu — atsevišķās PDF lapās.

@@ -1,88 +1,234 @@
-# 07 — Programming Coursework Portfolio (16 tasks)
+# 07 — Programming Coursework: 16 Progressive Tasks
 
-> Practical programming tasks: Python → C → SQL → Flask web app
-> Praktiskie programmēšanas darbi: Python → C → SQL → Flask web aplikācija
+> 16 autograded assignments — Python → C/C++ → SQL → Flask web app
+> A full programming foundation built over one academic year
 
-**Context:** RTU programming course (rtudip classroom), RMCE01, 2024/2025
-**Source:** 16 GitHub Classroom assignments
-
----
-
-## EN — for GitHub README / EN CV
-
-**Programming Coursework — 16 progressive tasks (RTU, 2024/2025)**
-
-Full programming foundations spanning Python, C/C++, SQL and web development. Tasks were autograded (input/output + function tests) and developed in GitHub Classroom workflow.
-
-### Python fundamentals (tasks 01–09)
-- **01 hello** — input/output, formatted strings
-- **02 questions** — type casting, conditionals, function-test autograding
-- **03 pyramids** — nested loops (5 progressive variants)
-- **04 text-analysis** — Coleman-Liau readability index (letters / words / sentences)
-- **05 functions** — `cash` change-making with greedy coin algorithm; functions: `get_cents`, `calculate_quarters`, etc.
-- **06 scrabble-lists** — Scrabble scoring with lists, two-player comparison
-- **07 dictionary** — fruit-calorie lookup using dicts, `find_fruit()` function with case-insensitive matching
-- **08 libraries** — FIGlet ASCII-art (third-party library install + use)
-- **09 api** — Game-of-Thrones quotes API (JSON request, 3 Tyrion + 2 Jon Snow quotes parsed)
-
-### C / C++ (tasks 10–13)
-- **10 introduction-to-c** — first C programs: `half.cpp`, pyramid printing
-- **11 continuing-with-c** — arrays, type conversions, total/average hours calculator
-- **12 c-scrabble** — Scrabble scoring rewritten in C (same problem as task 06, different language)
-- **13 sort-and-search** — multiple algorithms in C++:
-  - Bubble sort with linked lists (known + unknown size)
-  - Selection sort with arrays
-  - Linear search (arrays + linked lists)
-  - Binary search
-
-### Memory management in C (task 14)
-- **14 memory-allocation** — read `plates.txt` into dynamically allocated `char*` array using `malloc` with `fread` 7-byte buffer reads; `\n → \0` normalization; correct cleanup on allocation failure (free earlier entries, close file); **verified with valgrind for memory leaks**.
-
-### Databases — SQL (task 15)
-- **15 db** — 14 SQL queries against two SQLite databases (`movies.db`, `fiftyville.db`); progression from simple SELECT (1 pt) through JOINs (2 pt) to complex multi-table investigations (3–4 pt). Example: list all actors who starred in *Toy Story* via LEFT JOIN across `people`, `stars`, `movies`.
-- 25 points total across 14 tasks.
-
-### Full-stack web — Flask (task 16)
-- **16 web** — Spotify-themed music recommendation site:
-  - Flask routes (`/`, `/input_page.html`, `/output_page.html`) with GET/POST handling
-  - SQLite persistence via parameterized queries (SQL-injection safe)
-  - Jinja templates with `head.html` partial, Bootstrap, custom CSS, JavaScript
-  - Form: mood dropdown + genre dropdown + username text + checkbox + submit
-  - Output page persists each lookup to DB and embeds Spotify iframe (track-ID extraction from URL)
-  - Includes a thoughtful AI-usage reflection README documenting how ChatGPT was used (and verified) during development
-
-**Skills demonstrated:** Python · C / C++ · SQL (SQLite, JOINs, aggregation) · Flask · Jinja templates · HTML/CSS · Bootstrap · JavaScript · REST/JSON APIs · data structures (linked lists, arrays, dicts) · sorting & searching algorithms · dynamic memory management (`malloc`/`free`, valgrind) · GitHub Classroom workflow · parameterized SQL queries
+**Context** RTU programming course (GitHub Classroom: `rtudip`) · RMCE01 · 2024/2025
+**Workflow** GitHub Classroom — each task is a separate `rtudip/practical-task-N-*-Lavs-Daniels-Skots-231RMC173` repo with autograded tests (input/output + function tests)
+**Languages** Python · C / C++ · SQL · HTML / CSS / JavaScript · Jinja
+**Frameworks** Flask · Bootstrap · SQLite
 
 ---
 
-## LV — for LV CV
+## What this folder is
 
-**Programmēšanas studiju darbu portfolio — 16 praktisku uzdevumu (RTU, 2024/2025)**
+A consolidated archive of all 16 practical tasks I completed in the programming course. Each task is in its own subfolder with the original source files exactly as they were submitted (and autograded as passing) to GitHub Classroom.
 
-Pilna programmēšanas pamatu apgūšana: Python → C/C++ → SQL → tīmekļa aplikācija. Uzdevumi autograduēti caur GitHub Classroom.
-
-**Tēmu pārskats:**
-- **Python (01–09):** ievads/izvads, datu tipi, cikli, virkņu apstrāde (Coleman-Liau lasāmības indekss), funkcijas, saraksti, vārdnīcas, ārējās bibliotēkas (FIGlet), API pieprasījumi (JSON parsēšana).
-- **C / C++ (10–13):** ievads C valodā, masīvi un tipa konversijas, algoritmi (bubble sort, selection sort, linear & binary search) gan masīviem, gan saistītajiem sarakstiem.
-- **Dinamiskā atmiņa C (14):** `malloc`/`fread`/`free` lietojums, korektais kļūdu apstrādes ceļš (atbrīvošana atmiņas piešķiršanas neveiksmes gadījumā), pārbaude ar **valgrind**.
-- **SQL (15):** 14 SQL pieprasījumi pret SQLite datu bāzēm — no vienkāršiem SELECT līdz vairāku tabulu JOIN izmeklēšanas vaicājumiem.
-- **Tīmekļa aplikācija — Flask (16):** Spotify stila mūzikas rekomendāciju vietne ar Jinja šablonu sistēmu, Bootstrap, custom CSS, JavaScript; SQLite glabāšana ar parametrizētiem vaicājumiem (drošība pret SQL injekciju); dinamiska Spotify iframe iebūvēšana.
-
-**Prasmes:** Python · C / C++ · SQL (SQLite, JOIN, agregācija) · Flask · Jinja · HTML/CSS · Bootstrap · JavaScript · REST API · datu struktūras · šķirošanas un meklēšanas algoritmi · dinamiskā atmiņa · GitHub Classroom
+The 16 tasks form a deliberate progression:
+- Tasks 01–09 build up Python from `print()` to API requests
+- Tasks 10–13 transition to C/C++ for low-level work
+- Task 14 adds dynamic memory management with valgrind-verified correctness
+- Task 15 introduces SQL on SQLite
+- Task 16 caps the year with a full-stack Flask + Bootstrap + SQLite web application
 
 ---
 
-## Files in this folder
-- `task01_hello/` … `task16_web/` — full source for each of 16 tasks
-- Each task includes its original README and the working code committed to GitHub Classroom
+## Python fundamentals (tasks 01–09)
 
-## Highlights for CV (top 3 to lead with)
-1. **task16_web** — Flask + SQLite + Bootstrap full-stack site
-2. **task15_db** — 14 SQL queries across SQLite schemas (movies + fiftyville investigation)
-3. **task14_memory-allocation** — C dynamic memory with valgrind validation
+| # | Folder | Topic | Key technique |
+|---|---|---|---|
+| 01 | `task01_hello/` | I/O, formatted strings | `input()`, f-strings |
+| 02 | `task02_questions/` | Type casting, conditionals | int/float conversion, function-test autograding |
+| 03 | `task03_pyramids/` | Nested loops, 5 variants | Building patterns of increasing difficulty |
+| 04 | `task04_text-analysis/` | Coleman-Liau readability | String iteration, sentence detection, grade-level formula |
+| 05 | `task05_functions/` | Cash / change-making | Greedy coin algorithm in 4 functions: `get_cents()`, `calculate_quarters(change)`, etc |
+| 06 | `task06_scrabble-lists/` | Scrabble scoring | List comprehensions, letter→points map |
+| 07 | `task07_dictionary/` | Fruit-calorie lookup | `find_fruit()` function with case-insensitive matching |
+| 08 | `task08_libraries/` | FIGlet ASCII-art | Third-party library install + use, requirements file |
+| 09 | `task09_api/` | Game of Thrones quotes API | HTTP request, JSON parsing — 3 Tyrion + 2 Jon Snow quotes |
 
-## CV bullet (short, EN)
-> *16-task programming portfolio (RTU, 2024/2025) covering Python fundamentals, C/C++ with dynamic memory (valgrind-verified), data structures and algorithms (linked lists, sort/search), SQL on SQLite, and a Flask + Bootstrap full-stack web app.*
+---
 
-## CV bullet (short, LV)
-> *16 uzdevumu programmēšanas portfolio (RTU, 2024/2025): Python pamati, C/C++ ar dinamisko atmiņu (valgrind pārbaude), datu struktūras un algoritmi, SQL uz SQLite un Flask + Bootstrap tīmekļa aplikācija.*
+## C / C++ (tasks 10–13)
+
+| # | Folder | Topic | Key technique |
+|---|---|---|---|
+| 10 | `task10_introduction-to-c/` | First C programs | `half.cpp`, pyramid printing, `int main()`, basic I/O |
+| 11 | `task11_continuing-with-c-and-c/` | Arrays, type conversions | Total/average hours calculator with array input |
+| 12 | `task12_c-scrabble/` | Scrabble in C | Same problem as task 06, different language |
+| 13 | `task13_sort-and-search/` | Sort & search algorithms in C++ | Multiple implementations (see below) |
+
+Task 13 in detail (`task13_sort-and-search/`):
+- `bubble_sort.cpp` — bubble sort with linked lists (known + unknown element count variants)
+- `selection_sort.cpp` — selection sort with arrays
+- `linear_search.cpp` — linear search (arrays + linked lists)
+- `binary_search.cpp` — binary search on arrays
+- All compile to working executables that the grader runs against test inputs
+
+---
+
+## C memory management (task 14)
+
+The first task that requires the engineer to think about memory ownership.
+
+`task14_memory-allocation/main.c`:
+
+- Reads `plates.txt` 7 bytes at a time using `fread` into a buffer
+- Allocates `char *plates[8]` dynamically with `malloc(strlen(buffer) + 1)`
+- Normalizes line breaks (`\n → \0`)
+- Frees previously allocated entries on subsequent allocation failure — **clean error recovery**
+- Closes the file pointer
+- **Verified with valgrind** — zero memory leaks
+
+```c
+plates[idx] = malloc(strlen(buffer) + 1);
+if (!plates[idx])
+{
+    fprintf(stderr, "Memory allocation failed at plate %d\n", idx);
+    // cleanup any earlier allocations
+    for (int j = 0; j < idx; j++)
+        free(plates[j]);
+    fclose(infile);
+    return 1;
+}
+```
+
+This is the "knowing what done means" pattern in C — allocation is paired with cleanup, even in the error path.
+
+---
+
+## SQL (task 15)
+
+![DB schema](images/07_sql_schema.png)
+
+*Fig. 1 — SQLite schema for `movies.db`: tables `people`, `movies`, `stars`, `ratings`, `directors` and the foreign-key relationships between them. Task 15 has 14 queries practicing JOINs across these tables.*
+
+`task15_db/` contains 14 SQL query files (`1.py` through `14.py`), each one wrapping a query in a small Python harness so the grader can verify the output.
+
+Task scoring breakdown:
+- Tasks 1–7: 1 point each (7 total) — simple SELECT, WHERE, ORDER BY
+- Tasks 8–11: 2 points each (8 total) — multi-table JOIN, GROUP BY, HAVING
+- Tasks 12–13: 3 points each (6 total) — nested queries, complex multi-table investigations
+- Task 14: 4 points — full investigation reconstruction
+- **Total: 25 points**
+
+![SQL queries](images/07_sql_queries.png)
+
+*Fig. 2 — Examples of the 14 SQL queries written for task 15: from simple SELECT to multi-table LEFT JOINs and the fiftyville-investigation-style queries that reconstruct a sequence of events from witness records*
+
+Example — task 15.8 (movies):
+
+```sql
+SELECT name
+FROM people
+LEFT JOIN stars ON people.id = stars.person_id
+LEFT JOIN movies ON stars.movie_id = movies.id
+WHERE title = 'Toy Story';
+```
+
+This is a 3-table LEFT JOIN chain that reads people → their roles → the movies they were in, filtered to the Toy Story title.
+
+The fiftyville investigation (task 14) is a recreated "CS50-style" mystery where multiple tables (people, bank_accounts, bakery_security_logs, courthouse_security_logs, atm_transactions, phone_calls, flights, airports) must be joined to identify the culprit. Practices building complex investigative queries.
+
+> Note: The `movies.db` (77 MB) and `fiftyville.db` reference databases are NOT included in this folder — they are part of the assignment source dataset and can be re-downloaded from CS50 if needed. The query files are in the folder.
+
+---
+
+## Full-stack web (task 16)
+
+![Flask routes](images/07_flask_routes.png)
+
+*Fig. 3 — Flask app routes (`app.py`): GET/POST handling for the input form and output page, with SQLite parameterized inserts*
+
+The capstone of the course year. `task16_web/` contains a complete Flask web application — a Spotify-themed music recommendation site.
+
+**Architecture:**
+- `app.py` — Flask backend with three routes:
+  - `/` and `/index.html` — landing page
+  - `/input_page.html` — form (mood dropdown + genre dropdown + username + checkbox + submit)
+  - `/output_page.html` — displays recommendation, embedded Spotify iframe, and saves the lookup to SQLite
+- `sql_connection.py` — SQLite layer:
+  - `create_db_table()` — initial schema setup on first run
+  - `insert_data(...)` — parameterized INSERT (no SQL injection)
+  - `retrieve_all_data()` — SELECT all rows
+  - `try_query_add()` / `try_query_retrieve()` — generic query interface
+- `templates/` — Jinja2 templates: `head.html` (shared header), `index.html`, `input_page.html`, `output_page.html`, `form_example.html` (reference)
+- `static/style.css` — custom CSS extending Bootstrap
+- `static/images/` — assets (Spotify icon, profile photo)
+- `data_files/custom_db.db` — SQLite database file
+
+**Stack:** Python + Flask + Jinja2 + SQLite + Bootstrap + custom CSS + JavaScript
+
+**Database design:** generic `demo` table with 5 INT fields and 5 STRING fields — proves the concept of a flexible schema even though only 5 string fields are actively used (username, mood, genre, track_title, spotify_url).
+
+**Recommendation engine:** simple two-key dictionary `recommendations[mood][genre]` returning `(track_title, spotify_url)`. Easy to extend.
+
+`README(AI usage).md` — Documents the AI usage during development (Daniel's own reflection from the time of submission): which problems were AI-assisted, why, and what was verified manually before committing.
+
+---
+
+## Files & folder structure
+
+Each `taskNN_*/` subfolder contains the original source files for that task — exactly as they were committed to and graded by GitHub Classroom. Folders may include:
+- Source code (`*.py`, `*.c`, `*.cpp`, `*.h`)
+- Test files (often `test_1.py`, `test_2.py`, ...)
+- README from the assignment (`README.md`)
+- Lesson materials (`lesson.py` where present)
+- Build outputs (cleaned via `.gitignore` for C tasks)
+
+---
+
+## How to run a task
+
+### Python tasks (01-09)
+```bash
+cd task04_text-analysis
+python main.py
+```
+
+### C tasks (10-14)
+```bash
+cd task14_memory-allocation
+gcc -Wall -o read main.c
+./read plates.txt
+```
+
+For task 14, to verify zero memory leaks:
+```bash
+valgrind --leak-check=full ./read plates.txt
+```
+
+### SQL task (15)
+```bash
+cd task15_db
+# Requires movies.db / fiftyville.db (excluded from repo, see note above)
+python 8.py
+```
+
+### Web task (16)
+```bash
+cd task16_web
+pip install flask
+flask run
+# Visit http://127.0.0.1:5000 in browser
+```
+
+---
+
+## Skills demonstrated
+
+- **Python** — fundamentals through API requests
+- **C / C++** — fundamentals, arrays, linked lists, algorithms
+- **Dynamic memory management in C** — `malloc`/`free`, clean error recovery, valgrind-verified
+- **Data structures & algorithms** — sorting (bubble, selection), searching (linear, binary), linked lists
+- **SQL (SQLite)** — SELECT, JOIN, LEFT JOIN, GROUP BY, complex multi-table queries
+- **Flask** — routes, GET/POST, Jinja templates
+- **Bootstrap + custom CSS** — responsive UI with custom Spotify-themed styling
+- **JavaScript** — basic frontend interactivity
+- **REST / JSON APIs** — HTTP request, JSON parsing
+- **GitHub Classroom workflow** — autograded assignment submissions
+- **Parameterized SQL queries** — SQL injection avoidance
+
+---
+
+## Latvian summary (LV)
+
+Šis ir 16 progresīvu programmēšanas uzdevumu komplekts no RTU programmēšanas kursa (GitHub Classroom, 2024./2025.):
+
+- **Python pamati (01–09)** — ievads/izvads, datu tipi, cikli, virkņu apstrāde (Coleman-Liau lasāmības indekss), funkcijas, saraksti, vārdnīcas, ārējās bibliotēkas (FIGlet), API pieprasījumi (Game of Thrones JSON)
+- **C / C++ (10–13)** — pirmais C kods, masīvi un tipa konversijas, algoritmi: bubble sort ar saistītajiem sarakstiem, selection sort, linear & binary search
+- **Dinamiskā atmiņa C (14)** — `malloc`/`fread`/`free` lietojums, korektais kļūdu apstrādes ceļš (atbrīvošana atmiņas piešķiršanas neveiksmes gadījumā), **valgrind verifikācija**
+- **SQL (15)** — 14 SQL pieprasījumi pret SQLite datu bāzēm (movies.db + fiftyville.db) — no SELECT/WHERE līdz vairāku tabulu JOIN izmeklēšanas vaicājumiem. Kopā 25 punkti.
+- **Pilna tīmekļa aplikācija (16)** — Spotify stila mūzikas rekomendāciju vietne ar Flask + SQLite + Jinja + Bootstrap + custom CSS + JS. Datu bāzes glabāšana ar parametrizētiem vaicājumiem (drošība pret SQL injekciju), dinamiska Spotify iframe iebūvēšana.
+
+Visu uzdevumu pirmkods atrodas `taskNN_*/` apakšmapēs ar oriģinālo struktūru no GitHub Classroom — visi 16 ir izpildīti un automātiski novērtēti.
