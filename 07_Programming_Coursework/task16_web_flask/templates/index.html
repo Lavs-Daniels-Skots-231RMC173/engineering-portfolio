@@ -1,0 +1,238 @@
+{% extends "head.html" %}
+{% block template_title %}Spotify song recommendation{% endblock %}
+
+{% block template_content %}
+
+  <!-- HERO SECTION -->
+  <section class="hero text-center text-white py-5">
+    <div class="container">
+      <!-- Spotify Icon -->
+      <img
+        src="{{ url_for('static', filename='images/spotify-icon.png') }}"
+        alt="Spotify logo"
+        class="spotify-icon mb-2 mx-auto d-block"
+      />
+
+      <!-- Avatar -->
+      <img
+        src="{{ url_for('static', filename='images/profile.jpg') }}"
+        alt="Profile photo of Daniels Skots Lavs"
+        class="rounded-circle profile-img mx-auto d-block mb-3"
+      />
+
+      <!-- Name + Tagline -->
+      <h1 class="display-3 fw-bold mb-1">Daniels Skots Lavs</h1>
+      <p class="lead fst-italic text-light-opacity mb-3">
+        Engineering student &amp; chord-lover helping you find your perfect track.
+      </p>
+
+      <!-- Scroll-down chevron -->
+      <a href="#main-content" class="text-white">
+        <i class="bi bi-chevron-double-down" style="font-size:1.5rem;"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- Wave Divider into White -->
+  <div class="hero-wave">
+    <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
+      <path d="M0,0 C300,100 900,0 1200,100 L1200,0 L0,0 Z" fill="#fff"></path>
+    </svg>
+  </div>
+
+  <hr class="accent-hr my-0">
+
+  <!-- MAIN CONTENT -->
+  <div id="main-content" class="container my-5 pb-5">
+    <div class="row gy-4">
+      <!-- LEFT COLUMN -->
+      <div class="col-lg-3 col-md-4 col-sm-12 text-center">
+        <div class="card border-success mb-3">
+          <div class="card-body p-3">
+            <p class="mb-0 small">
+              I’m an Engineering student passionate about code &amp; chords.
+              Tell me your mood and favorite genres, and I’ll suggest the perfect track.
+            </p>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <span class="badge bg-secondary me-1 mb-1">Rock</span>
+          <span class="badge bg-secondary me-1 mb-1">Pop</span>
+          <span class="badge bg-secondary me-1 mb-1">Jazz</span>
+          <span class="badge bg-secondary me-1 mb-1">Electronic</span>
+          <span class="badge bg-secondary mb-1">Classical</span>
+        </div>
+
+        <div class="d-grid gap-2 mb-4">
+          <a
+            href="https://open.spotify.com/user/31dvxcrh6hwgiuoutqe3rbq7phn4"
+            class="btn btn-success btn-sm"
+            target="_blank"
+          >Spotify Profile</a>
+          <a
+            href="https://open.spotify.com/playlist/33CjZqY0JnLr033kTeCCCZ"
+            class="btn btn-outline-success btn-sm"
+            target="_blank"
+          >Favorite Playlist</a>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="col-lg-9 col-md-8 col-sm-12">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <h5 class="card-title">Questions?</h5>
+            <p class="card-text">Feel free to drop me a line.</p>
+            <a
+              href="mailto:daniels-skots.lavs@edu.rtu.lv"
+              class="btn btn-outline-secondary btn-sm"
+            >Email Me</a>
+          </div>
+        </div>
+
+        <div class="text-center mb-5">
+          <a
+            href="{{ url_for('input_page_fuction') }}"
+            class="btn btn-success btn-lg">
+            Find My Song &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="accent-hr my-5">
+
+    <!-- HOW IT WORKS -->
+    <h2 class="text-center mb-4">How It Works</h2>
+    <div class="row text-center gx-4 mb-5">
+      <div class="col-md-4 mb-4">
+        <div class="how-step mb-2">🎯</div>
+        <h5>Pick Your Mood</h5>
+        <p class="small">Choose your current vibe.</p>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="how-step mb-2">🎸</div>
+        <h5>Select Genres</h5>
+        <p class="small">Tell me what you love.</p>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="how-step mb-2">🎵</div>
+        <h5>Get Your Match</h5>
+        <p class="small">Receive the perfect track.</p>
+      </div>
+    </div>
+
+    <hr class="accent-hr my-5">
+
+  <!-- FALLBACK PLAYLIST LINKS -->
+  <section id="fallback-playlists" class="py-5">
+    <div class="container text-center">
+      <h2>Need More Inspiration?</h2>
+      <p class="text-muted mb-4">
+        Didn’t find your perfect match? Try one of these hand-picked Spotify playlists.
+      </p>
+      <div class="row justify-content-center gx-3 gy-3">
+        <div class="col-6 col-sm-4 col-md-3">
+          <a href="https://open.spotify.com/playlist/37i9dQZF1DWXRqgorJj26U"
+             class="btn btn-success w-100"
+             target="_blank" rel="noopener noreferrer">
+            Rock Classics
+          </a>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3">
+          <a href="https://open.spotify.com/playlist/37i9dQZF1DX4WYpdgoIcn6"
+             class="btn btn-success w-100"
+             target="_blank" rel="noopener noreferrer">
+            Chill Vibes
+          </a>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3">
+          <a href="https://open.spotify.com/playlist/37i9dQZF1DX4sWSpwq3LiO"
+             class="btn btn-success w-100"
+             target="_blank" rel="noopener noreferrer">
+            Focus Flow
+          </a>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3">
+          <a href="https://open.spotify.com/playlist/4gdyJJFph3i2oMdpRnCONw"
+             class="btn btn-success w-100"
+             target="_blank" rel="noopener noreferrer">
+            Rap Songs
+          </a>
+        </div>
+      </div>
+
+      <!-- ← YOUR NEW HINT LINE HERE -->
+      <p class="text-center text-light-opacity mt-4 mb-1">
+        Or just listen right here 👇
+      </p>
+      <p class="text-center small text-muted mb-5">
+      ▶️ Click the green “Play” button below to load one of these into the mini-player.
+      </p>
+
+    </div>
+  </section>
+
+
+
+
+
+
+ <!-- MINI-PLAYER -->
+  <div class="mini-player fixed-bottom d-flex justify-content-between align-items-center px-4">
+    <div>🔊 Now playing: <span id="now-playing-text">None</span></div>
+    <button id="mini-play-btn" class="btn btn-sm btn-success">Play</button>
+  </div>
+
+  <!-- CONTAINER FOR EMBED -->
+  <div id="mini-embed-container"></div>
+
+  <!-- Random-playlist JS (inline for simplicity) -->
+  <script>
+    (function(){
+      const playlists = [
+        { id: "37i9dQZF1DWXRqgorJj26U", title: "Rock Classics" },
+        { id: "37i9dQZF1DX4WYpdgoIcn6", title: "Chill Vibes"   },
+        { id: "37i9dQZF1DX4sWSpwq3LiO", title: "Focus Flow"    },
+        { id: "4gdyJJFph3i2oMdpRnCONw", title: "Rap Songs"     }
+      ];
+      let playing = false;
+      const btn = document.getElementById("mini-play-btn");
+      const text = document.getElementById("now-playing-text");
+      const container = document.getElementById("mini-embed-container");
+
+      btn.addEventListener("click", ()=> {
+        if (!playing) {
+          // pick a random playlist
+          const pl = playlists[Math.floor(Math.random()*playlists.length)];
+          text.textContent = pl.title;
+          // inject a small responsive embed
+          container.innerHTML = `
+            <div class="mini-embed ratio ratio-16x9">
+              <iframe
+                src="https://open.spotify.com/embed/playlist/${pl.id}"
+                allow="encrypted-media" allowtransparency="true"
+                frameborder="0"
+              ></iframe>
+            </div>
+          `;
+          btn.textContent = "Pause";
+        } else {
+          // stop / clear
+          text.textContent = "None";
+          container.innerHTML = "";
+          btn.textContent = "Play";
+        }
+        playing = !playing;
+      });
+    })();
+  </script>
+
+  <!-- FOOTER -->
+  <footer class="footer text-center py-4">
+    <small>
+      © 2025 Daniels Skots Lavs • 
+    </small>
+  </footer>
+
+{% endblock %}

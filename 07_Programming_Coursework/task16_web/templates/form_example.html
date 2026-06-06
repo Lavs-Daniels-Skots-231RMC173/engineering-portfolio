@@ -1,0 +1,25 @@
+  <!-- this says which template we use as base and thus where to try to add the code blocks that we create -->
+{% extends "head.html "%}
+
+<!-- this block is responsible for page title -->
+{% block template_title %}
+
+  <!-- write html tag for title and add a title -->
+
+{% endblock %}
+
+
+{% block template_contents %}
+  <div>
+    <form action="/" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="month">Month:</label>
+        <input type="text" id="month" name="month" required>
+        <label for="day">Day:</label>
+        <input type="text" id="day" name="day" required>
+        <button type="submit">Add</button>
+    </form>
+  </div>
+
+{% endblock %}

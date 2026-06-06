@@ -1,0 +1,150 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: t0_1
+      id: t0_1
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: t0_1
+        setup-command: sudo -H pip3 install pytest
+        command: pytest ./tests/test_0_1.py
+        timeout: 1
+        max-score: 0
+    - name: t0_2
+      id: t0_2
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: t0_2
+        setup-command: ''
+        command: pytest ./tests/t0_2.py
+        timeout: 1
+        max-score: 2
+    - name: t0_3
+      id: t0_3
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: t0_3
+        setup-command: ''
+        command: pytest ./tests/t0_3.py
+        timeout: 1
+        max-score: 3
+    - name: t1
+      id: t1
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: t1
+        setup-command: ''
+        command: pytest ./tests/t1.py
+        timeout: 1
+        max-score: 1
+    - name: t2
+      id: t2
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: t2
+        setup-command: ''
+        command: pytest ./tests/t2.py
+        timeout: 1
+        max-score: 1
+    - name: t3
+      id: t3
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: t3
+        setup-command: ''
+        command: pytest ./tests/t3.py
+        timeout: 1
+        max-score: 1
+    - name: t4
+      id: t4
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: t4
+        setup-command: ''
+        command: pytest ./tests/t4.py
+        timeout: 1
+        max-score: 1
+    - name: t5
+      id: t5
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: t5
+        setup-command: ''
+        command: pytest ./tests/t5.py
+        timeout: 1
+        max-score: 1
+    - name: t6
+      id: t6
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: t6
+        setup-command: ''
+        command: pytest ./tests/t6.py
+        timeout: 1
+        max-score: 1
+    - name: t7
+      id: t7
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: t7
+        setup-command: ''
+        command: pytest ./tests/t7.py
+        timeout: 1
+        max-score: 1
+    - name: t8
+      id: t8
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: t8
+        setup-command: ''
+        command: pytest ./tests/t8.py
+        timeout: 1
+        max-score: 1
+    - name: t9
+      id: t9
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: t9
+        setup-command: ''
+        command: pytest ./tests/t9.py
+        timeout: 1
+        max-score: 1
+    - name: t10
+      id: t10
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: t10
+        setup-command: ''
+        command: pytest ./tests/t10.py
+        timeout: 1
+        max-score: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        T0_1_RESULTS: "${{steps.t0_1.outputs.result}}"
+        T0_2_RESULTS: "${{steps.t0_2.outputs.result}}"
+        T0_3_RESULTS: "${{steps.t0_3.outputs.result}}"
+        T1_RESULTS: "${{steps.t1.outputs.result}}"
+        T2_RESULTS: "${{steps.t2.outputs.result}}"
+        T3_RESULTS: "${{steps.t3.outputs.result}}"
+        T4_RESULTS: "${{steps.t4.outputs.result}}"
+        T5_RESULTS: "${{steps.t5.outputs.result}}"
+        T6_RESULTS: "${{steps.t6.outputs.result}}"
+        T7_RESULTS: "${{steps.t7.outputs.result}}"
+        T8_RESULTS: "${{steps.t8.outputs.result}}"
+        T9_RESULTS: "${{steps.t9.outputs.result}}"
+        T10_RESULTS: "${{steps.t10.outputs.result}}"
+      with:
+        runners: t0_1,t0_2,t0_3,t1,t2,t3,t4,t5,t6,t7,t8,t9,t10

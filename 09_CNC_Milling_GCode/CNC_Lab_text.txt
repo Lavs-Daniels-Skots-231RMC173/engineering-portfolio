@@ -1,0 +1,137 @@
+﻿
+Laboratorijas darbs: CNC frēzes programmēšana G-kodos.
+Izmantojam programmu CNCsimulator Pro.
+Norādīt izmantojamās frēzes nosaukumu/tipu - HobbyMill – vertikālais CNC frēzēšanas darbagalds
+
+Apstrādājamās detaļas izmēri - 150 × 100 × 20 mm 
+
+Izmantoto griezējinstrumentu diametri un gala forma:
+T6 – Ø5 mm cilindriskā gala frēze ar plakanu galu (end mill).
+T7 – Ø5 mm frēze ar konisku/smailu galu (koniskā gala frēze).
+
+Apstrādātas detaļas “Screenshot” no programmas( pietuvināts un bez frēzes darbagalda) – Raķete ar zvaigznēm
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Programmas kods:
+
+#region
+(Daniels Skots Lavs RMCE01 3. kurss, 16.11.2025)
+$Message "Raķete" 1 0 (Detaļas nosaukums)
+$Millimeters (Nosaka, ka jālietio milimetru skala)
+$Mill (Norāda, ka jālieto frēzes darbagalds)
+$AddMillPart 170 120 20 0 0 0 0 0 190 218 218 0 1 (Definē sagatavi)
+$DefineMillTool "N:Drill mm" 6 0 5 50 5 15 0 (Definē instrumentu Nr6)
+$DefineMillTool "N:Drill mm" 7 30 5 50 5 15 2 (Definē instrumentu Nr7)
+$ReadTasDefinedTool (DT komandas vietā atļauj lietot komandu T)
+#endregion
+
+G92 Z20
+T6 M6 (nomaina instrumentu uz T6)
+M03 S2500 F50(iedarbina frezi ar 2500rpm)
+
+( Window picture only - no outer frame )
+G21          (mm)
+G90          (absolute)
+G92 X0 Y0 Z40
+G92 Z20          (0 uz detaļas virsmas)
+
+(---- T6: Raķete ----)
+T6 M6
+M03 S2500
+
+(Ķermeņa kontūra)
+G00 X75 Y80 Z2
+G01 Z-2 F400
+G01 X65 Y60
+G01 X65 Y30
+G01 X70 Y25
+G01 X75 Y20
+G01 X80 Y25
+G01 X85 Y30
+G01 X85 Y60
+G01 X75 Y80
+G01 Z2
+
+(Logs – aptuvens aplis)
+G00 X80 Y60 Z2
+G01 Z-2 F300
+G02 X75 Y60 I-5 J0
+G01 Z2
+
+(Kreisais spārns)
+G00 X65 Y35 Z2
+G01 Z-2 F350
+G01 X50 Y25
+G01 X65 Y25
+G01 X65 Y35
+G01 Z2
+
+(Labais spārns)
+G00 X85 Y35 Z2
+G01 Z-2 F350
+G01 X100 Y25
+G01 X85 Y25
+G01 X85 Y35
+G01 Z2
+
+(Liesma apakšā)
+G00 X70 Y20 Z2
+G01 Z-2 F350
+G01 X75 Y10
+G01 X80 Y20
+G01 X70 Y20
+G01 Z2
+
+
+(---- T7: Zvaigznes ----)
+T7 M6
+M03 S2500
+
+(Zvaigzne 1 – augšējā kreisajā)
+G00 X40 Y77 Z2
+G01 Z-2 F300
+G01 X40 Y83
+G01 Z2
+G00 X37 Y80 Z2
+G01 Z-2 F300
+G01 X43 Y80
+G01 Z2
+
+(Zvaigzne 2 – vidū pa kreisi)
+G00 X25 Y47 Z2
+G01 Z-2 F300
+G01 X25 Y53
+G01 Z2
+G00 X22 Y50 Z2
+G01 Z-2 F300
+G01 X28 Y50
+G01 Z2
+
+(Zvaigzne 3 – augšējā labajā)
+G00 X120 Y67 Z2
+G01 Z-2 F300
+G01 X120 Y73
+G01 Z2
+G00 X117 Y70 Z2
+G01 Z-2 F300
+G01 X123 Y70
+G01 Z2
+
+G00 Z30
+             M30

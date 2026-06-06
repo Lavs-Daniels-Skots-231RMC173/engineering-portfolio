@@ -1,0 +1,27 @@
+# Build artefacts
+__pycache__/
+*.pyc
+.vscode/
+.vs/
+
+# Atmel Studio / Microchip Studio
+Debug/
+*.elf
+*.lss
+*.map
+*.srec
+*.eep
+*.o
+*.d
+makedep.mk
+Makefile
+
+# Editor backups
+*.bak
+~$*
+.DS_Store
+Thumbs.db
+
+# Large CS50 assignment datasets (not your work — re-downloadable from course)
+07_Programming_Coursework/task15_db/movies.db
+07_Programming_Coursework/task15_db/fiftyville.db

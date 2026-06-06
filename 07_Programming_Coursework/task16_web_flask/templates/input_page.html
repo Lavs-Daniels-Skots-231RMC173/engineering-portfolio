@@ -1,0 +1,131 @@
+{% extends "head.html" %}
+{% block template_title %}Find My Song{% endblock %}
+{% block template_content %}
+<section id="survey-section" class="py-5 position-relative">
+  <!-- Spotify swirl watermark -->
+  <div class="spotify-watermark"></div>
+
+  <div class="step-tabs d-flex">
+    <div class="step flex-fill text-center" data‐step="0">
+      😊 Mood
+    </div>
+    <div class="step flex-fill text-center" data‐step="1">
+      🎸 Genre
+    </div>
+    <div class="step flex-fill text-center" data‐step="2">
+      ✏️ Name
+    </div>
+  </div>
+
+  <div class="container d-flex justify-content-center">
+    <div class="card shadow-sm" style="max-width: 600px; width: 100%;">
+      <!-- green accent bar -->
+      <div style="height:6px;
+                  background:#1DB954;
+                  border-top-left-radius:.25rem;
+                  border-top-right-radius:.25rem;">
+      </div>
+
+      <div class="card-body">
+        <h2 class="card-title text-center mb-5">Find My Song</h2>
+        <form action="{{ url_for('input_page_fuction') }}" method="POST">
+          
+          <!-- 1) Mood dropdown -->
+          <div class="form-step mb-4 p-3 rounded">
+            <label for="mood" class="form-label fw-bold">1. Select your mood</label>
+            <small class="text-muted d-block mb-2">Pick the vibe that best fits your day.</small>
+            <select id="mood" name="mood" class="form-select" required>
+              <option value="" selected>Choose your vibe…</option>
+              <option value="happy">😊 Happy</option>
+              <option value="sad">😢 Sad</option>
+              <option value="relaxed">😌 Relaxed</option>
+            </select>
+          </div>
+
+          <!-- 2) Genre radios -->
+          <div class="form-step mb-4 p-3 rounded">
+            <label class="form-label fw-bold d-block mb-2">2. Select genre</label>
+            <small class="text-muted d-block mb-2">Choose one so we can zero-in on your perfect track.</small>
+            <div class="btn-group" role="group" id="genre-group">
+              <input type="radio" class="btn-check" name="genre" id="genre-rock" value="rock" autocomplete="off" required>
+              <label class="btn btn-outline-success" for="genre-rock">Rock</label>
+
+              <input type="radio" class="btn-check" name="genre" id="genre-pop"  value="pop"  autocomplete="off">
+              <label class="btn btn-outline-success" for="genre-pop">Pop</label>
+
+              <input type="radio" class="btn-check" name="genre" id="genre-jazz" value="jazz" autocomplete="off">
+              <label class="btn btn-outline-success" for="genre-jazz">Jazz</label>
+            </div>
+          </div>
+
+          <!-- 3) Name field -->
+          <div class="form-step mb-4 p-3 rounded">
+            <label for="user-name" class="form-label fw-bold">3. Your name</label>
+            <small class="text-muted d-block mb-2">So we know who to send your track to!</small>
+            <input 
+              type="text" 
+              class="form-control" 
+              name="username" 
+              placeholder="e.g. Taylor Swift" 
+              required
+            >
+          </div>
+
+          <!-- Submit -->
+          <div class="d-grid mb-3">
+            <button type="submit" class="btn btn-success btn-lg">
+              Find My Song →
+            </button>
+          </div>
+
+          <p class="text-center text-muted fst-italic small">
+            We’ll spin up your track in a moment — thanks for dropping by!
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+;(function(){
+  const steps       = document.querySelectorAll('.step-tabs .step');
+  const moodSelect  = document.getElementById('mood');
+  const genreInputs = document.querySelectorAll('input[name="genre"]');
+  const nameInput   = document.getElementById('user-name');
+  const surveySec   = document.getElementById('survey-section');
+
+  const moodMap = {
+    sad:     'mood-sad',
+    happy:   'mood-happy',
+    relaxed: 'mood-relaxed'
+  };
+
+  // helper to toggle step
+  function setStepDone(i, done) {
+    steps[i].classList.toggle('completed', !!done);
+  }
+
+  // mood → step 0 + background tint
+  moodSelect.addEventListener('change', () => {
+    Object.values(moodMap).forEach(c => surveySec.classList.remove(c));
+    const cls = moodMap[moodSelect.value];
+    if (cls) surveySec.classList.add(cls);
+
+    setStepDone(0, !!moodSelect.value);
+  });
+
+  // genre → step 1
+  genreInputs.forEach(radio => {
+    radio.addEventListener('change', () => {
+      setStepDone(1, !!document.querySelector('input[name="genre"]:checked'));
+    });
+  });
+
+  // name → step 2
+  nameInput.addEventListener('input', () => {
+    setStepDone(2, nameInput.value.trim().length > 0);
+  });
+})();
+</script>
+{% endblock %}

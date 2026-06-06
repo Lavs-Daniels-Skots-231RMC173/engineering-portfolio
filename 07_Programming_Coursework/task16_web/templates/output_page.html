@@ -1,0 +1,103 @@
+{% extends "head.html" %}
+{% block template_title %}Your Recommendation{% endblock %}
+
+{% block template_content %}
+<section 
+  class="py-5 d-flex align-items-center position-relative" 
+  style="background:#E8F5E9; min-height:calc(100vh - 56px);"
+>
+  <!-- big stamp behind the card -->
+  <div class="spotify-stamp"></div>
+
+  <div class="container d-flex flex-column align-items-center">
+
+    <div class="card shadow-sm text-center mb-4 position-relative" style="max-width:400px; width:100%;">
+      <!-- green accent bar -->
+      <div style="
+        height:6px;
+        background:#1DB954;
+        border-top-left-radius:.25rem;
+        border-top-right-radius:.25rem;
+      "></div>
+
+      <div class="card-body">
+        <!-- 1) Personal greeting -->
+        <h2 class="card-title mb-3">
+          {{ username }}, here’s your recommended song!
+        </h2>
+
+        <!-- 2) Embedded player -->
+        {% set recommendations = {
+          'happy': {
+            'rock':    ("Don't Stop Me Now",           'https://open.spotify.com/track/43DHLzDkncpby82Po5jlOZ'),
+            'pop':     ('Happy',                       'https://open.spotify.com/track/6NPVjNh8Jhru9xOmyQigds'),
+            'jazz':    ('Summertime',                  'https://open.spotify.com/track/20XdEFyaUR9C7aDIdq2OAd')
+          },
+          'sad': {
+            'rock':    ('Nutshell',                    'https://open.spotify.com/track/2JuasWPUodaUxf5nwNpciQ'),
+            'pop':     ('Someone Like You',            'https://open.spotify.com/track/4kflIGfjdZJW4ot2ioixTB'),
+            'jazz':    ('Someone to Watch Over Me',    'https://open.spotify.com/track/65AdKtpL8F3alW7QLD5UNj')
+          },
+          'relaxed': {
+            'rock':    ('Wish You Were Here',          'https://open.spotify.com/track/7pKfPomDEeI4TPT6EOYjn9'),
+            'pop':     ('Butterflies',                 'https://open.spotify.com/track/1dWUBCoztAMZcqec1CAE6z'),
+            'jazz':    ('So What',                     'https://open.spotify.com/track/2RlgNHKcydI9sayD2Df2xp')
+          }
+        } %}
+        {% set rec = recommendations.get(mood, {}).get(genre) %}
+
+        {% if rec %}
+          {% set track_id = rec[1].split('/')[-1].split('?')[0] %}
+          <div class="ratio ratio-16x9 mb-4">
+            <iframe
+              src="https://open.spotify.com/embed/track/{{ track_id }}"
+              frameborder="0"
+              allow="encrypted-media"
+              allowtransparency="true"
+              class="rounded shadow-sm"
+            ></iframe>
+          </div>
+        {% else %}
+          <p class="text-muted mb-4">
+            Sorry, we couldn’t find a match for that combo!
+          </p>
+        {% endif %}
+
+        <!-- 3) Button stack: custom Spotify pill + Try again -->
+        <div class="d-flex flex-column align-items-center gap-3 mb-4">
+          {% if rec %}
+            <a
+              href="{{ rec[1] }}"
+              class="btn spotify-pill-btn d-inline-flex align-items-center px-4 py-2"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <!-- play icon -->
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   width="20" height="20" fill="currentColor"
+                   class="bi bi-play-fill pill-icon me-2"
+                   viewBox="0 0 16 16">
+                <path d="M11.596 8.697l-6.363 3.692A.5.5 0 0 1 4 12.992V3.008a.5.5 0 0 1 .757-.429l6.363 3.692a.5.5 0 0 1 0 .858z"/>
+              </svg>
+              Listen on Spotify
+            </a>
+          {% endif %}
+
+          <a
+            href="{{ url_for('input_page_fuction') }}"
+            class="btn btn-success btn-lg px-5"
+          >
+            Try again
+          </a>
+        </div>
+
+        <!-- 4) Footer note -->
+        <p class="text-center text-muted" style="max-width:400px;">
+          🎧 Enjoy your tune—come back anytime for more personalized beats!
+        </p>
+      </div><!-- /.card-body -->
+    </div><!-- /.card -->
+
+  </div><!-- /.container -->
+</section>
+{% endblock %}
