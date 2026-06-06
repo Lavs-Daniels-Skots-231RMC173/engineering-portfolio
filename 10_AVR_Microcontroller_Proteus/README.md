@@ -15,7 +15,7 @@
 # 10 — AVR Microcontroller: 9 C Programs + Proteus Simulation
 
 > Mikrokontroleru programmēšana C valodā (AVR / Microchip Studio) ar Proteus simulāciju
-> Nine progressive C programs from blinking LEDs to closed-loop DC motor control
+> Nine progressive C programs from blinking LEDs to open-loop DC motor speed control (ADC → PWM → H-bridge)
 
 **Context** RTU studiju projekti · RMCE01 · 3rd year · October–December 2025
 **Toolchain** Microchip Studio (AVR-GCC) · Proteus Design Suite
@@ -25,7 +25,9 @@
 
 ## The progression
 
-Nine C programs over 3 months — from GPIO + button reading to closed-loop DC motor control with ADC + PWM + H-bridge + LED bar graph. All use AVR runtime headers (`avr/io.h`, `avr/interrupt.h`, `util/delay.h`), register-level config (not Arduino abstractions), simulated in Proteus before any hardware flashing.
+Nine C programs over 3 months — from GPIO + button reading to open-loop DC motor speed control with ADC + PWM + H-bridge + LED bar graph. All use AVR runtime headers (`avr/io.h`, `avr/interrupt.h`, `util/delay.h`), register-level config (not Arduino abstractions), simulated in Proteus before any hardware flashing.
+
+> **Open-loop, not closed-loop:** the potentiometer reading maps directly to PWM duty — there is no speed or current feedback. A true closed-loop controller would require an encoder (or current sense) and a PI regulator. Calling out the distinction explicitly because the terminology matters.
 
 | # | Date | Topic | Techniques |
 |---|---|---|---|
@@ -37,7 +39,7 @@ Nine C programs over 3 months — from GPIO + button reading to closed-loop DC m
 
 ---
 
-## Flagship — GccApplication9: closed-loop DC motor controller
+## Flagship — GccApplication9: open-loop DC motor controller
 
 ![GccApplication9 code](images/10_avr_motor_code.png)
 
@@ -169,7 +171,7 @@ Complete embedded system on 8-bit MCU — sensor input → real-time conversion 
 - **Bitwise register manipulation** — `(1 << BIT_NAME)` patterns
 - **H-bridge motor direction control** with state machine
 - **Button debouncing** — software delay + re-read
-- **PWM duty from sensor input** — closed-loop in 4 instructions
+- **PWM duty from sensor input** — direct ADC → OCR2 mapping (open-loop, no feedback)
 - **LED bar graph display** — mask `0xFF << (8 - lvl)`
 - **Proteus simulation**
 - **Microchip Studio toolchain**
@@ -178,7 +180,9 @@ Complete embedded system on 8-bit MCU — sensor input → real-time conversion 
 
 ## Latvian summary (LV)
 
-AVR mikrokontroleru programmēšanas kursa darbu komplekts (RTU, 3. kurss, oktobris–decembris 2025) — deviņas C valodas programmas, kas progresē no LED mirgošanas līdz slēgtas cilpas līdzstrāvas motora vadībai. Visas rakstītas reģistru līmenī (nevis Arduino abstrakcijas), debugētas Proteus pirms ielādes.
+AVR mikrokontroleru programmēšanas kursa darbu komplekts (RTU, 3. kurss, oktobris–decembris 2025) — deviņas C valodas programmas, kas progresē no LED mirgošanas līdz **atvērta cikla** (open-loop) līdzstrāvas motora ātruma vadībai. Visas rakstītas reģistru līmenī (nevis Arduino abstrakcijas), debugētas Proteus pirms ielādes.
+
+*Atvērts cikls, nevis slēgts: potenciometrs iestata PWM aizpildījumu tieši; nav ātruma vai strāvas atgriezeniskās saites. Patiess slēgts cikls prasītu enkoderi (vai strāvas mērīšanu) un PI regulatoru.*
 
 **Flagship — GccApplication9 (19.11.2025):** pilna ieguldītā sistēma uz AVR @ 8 MHz:
 - **ADC** — 10-bit, AVCC, kanāls 3, pārtraukuma vadīta nepārtraukta konversija (ISR pati pārstartē)
