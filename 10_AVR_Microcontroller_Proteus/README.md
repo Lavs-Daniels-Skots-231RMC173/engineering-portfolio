@@ -25,40 +25,36 @@
 
 ## The progression
 
-Nine C programs written over three months that walk from the absolute basics of GPIO and button reading to a complete closed-loop DC-motor control system with ADC, PWM, H-bridge and LED bar graph. All programs use the AVR runtime headers (`avr/io.h`, `avr/interrupt.h`, `util/delay.h`), are configured at the register level (not Arduino abstractions), and are simulated in Proteus before any hardware flashing.
+Nine C programs over 3 months — from GPIO + button reading to closed-loop DC motor control with ADC + PWM + H-bridge + LED bar graph. All use AVR runtime headers (`avr/io.h`, `avr/interrupt.h`, `util/delay.h`), register-level config (not Arduino abstractions), simulated in Proteus before any hardware flashing.
 
 | # | Date | Topic | Techniques |
 |---|---|---|---|
-| 1 | 01.10.2025 | LED running light + START/STOP | GPIO, button polling, software debounce |
-| 2 | 22.10.2025 | RESET / START / STOP control | 3-button state machine |
-| 3 | 22.10.2025 | Timer-overflow interrupt | `ISR(TIMER0_OVF_vect)`, `sei()` |
-| 4 | early 11.2025 | Intermediate exercise | — |
-| 5 | 29.10.2025 | Timer-compare interrupt | `ISR(TIMER0_COMP_vect)`, CTC mode, F_CPU = 1 MHz |
-| 6, 7, 8 | mid 11.2025 | Intermediate exercises | — |
-| **9** | **19.11.2025** | **DC motor controller — ADC + PWM + H-bridge** | **Full closed-loop system (highlight)** |
+| 1 | 01.10.2025 | LED running light + START/STOP | GPIO, button polling, debounce |
+| 2 | 22.10.2025 | RESET / START / STOP | 3-button state machine |
+| 3 | 22.10.2025 | Timer-overflow ISR | `ISR(TIMER0_OVF_vect)`, `sei()` |
+| 5 | 29.10.2025 | Timer-compare ISR | `ISR(TIMER0_COMP_vect)`, CTC mode |
+| **9** | **19.11.2025** | **DC motor controller** | **ADC + Fast PWM + H-bridge (flagship)** |
 
 ---
 
-## The flagship — GccApplication9: closed-loop DC motor controller
-
-A complete embedded system on AVR (F_CPU = 8 MHz) that combines **four peripherals** working in coordination:
+## Flagship — GccApplication9: closed-loop DC motor controller
 
 ![GccApplication9 code](images/10_avr_motor_code.png)
 
-*Fig. 1 — `GccApplication9.c` excerpts: ADC + Timer2 Fast PWM init at the register level; `ADC_vect` ISR maps the 10-bit ADC reading to an 8-bit PWM duty cycle and a LED bar-graph mask, then re-triggers the next conversion; H-bridge direction states drive PC0–PC3.*
+*Fig. 1 — `GccApplication9.c` excerpts: ADC + Timer2 Fast PWM register-level init; `ADC_vect` ISR maps 10-bit ADC reading to 8-bit PWM duty + LED bar mask, re-triggers next conversion; H-bridge drives PC0–PC3.*
 
 ### Hardware
-- **AVR microcontroller** at 8 MHz
-- **Potentiometer** on ADC channel 3 (PF3) — sets motor speed
-- **DC motor** controlled via an external **H-bridge** wired to PC0–PC3
-- **PWM output** on OC2 (PB7) — controls motor speed via duty-cycle
-- **8 LEDs** on PORTD — bar-graph visual indicator of current speed
-- **2 buttons** on PB0/PB1 — direction selection (forward / reverse / stop)
+- **AVR** @ 8 MHz
+- **Potentiometer** on ADC ch 3 (PF3) — sets speed
+- **DC motor** via external **H-bridge** wired to PC0–PC3
+- **PWM** on OC2 (PB7) — duty controls speed
+- **8 LEDs** on PORTD — bar graph
+- **2 buttons** on PB0/PB1 — direction (fwd / rev / stop)
 
-### Peripheral configuration
+### Peripheral init
 
 ```c
-// ADC: 10-bit, AVCC reference, channel 3, interrupt-driven, /128 prescaler
+// ADC: 10-bit, AVCC, channel 3, interrupt-driven, /128 prescaler
 void init_adc(void) {
     ADMUX  = (1 << REFS0) | (0x03 & 0x1F);
     ADCSRA = (1 << ADEN)  | (1 << ADIE)
@@ -72,31 +68,23 @@ void init_pwm_timer2(void) {
 }
 ```
 
-### The ADC ISR — the heart of the system
+### ADC ISR — the heart
 
 ```c
 ISR(ADC_vect) {
     uint16_t adc_10bit = ADC;
-
-    // Map 10-bit ADC to 8-bit PWM duty
-    uint8_t pwm_speed = (uint8_t)(adc_10bit >> 2);
+    uint8_t  pwm_speed = (uint8_t)(adc_10bit >> 2);    // 10→8 bit
     OCR2 = pwm_speed;
-
-    // 9-level bar graph: lvl = 0..8 → mask = 0xFF << (8 - lvl)
-    uint8_t lvl = (uint16_t)(adc_10bit * 9) / 1024;
-    uint8_t led_mask = (lvl == 0) ? 0x00 : (uint8_t)(0xFF << (8 - lvl));
+    uint8_t  lvl = (uint16_t)(adc_10bit * 9) / 1024;
+    uint8_t  led_mask = (lvl == 0) ? 0x00 : (uint8_t)(0xFF << (8 - lvl));
     PORTD = led_mask;
-
-    // Re-trigger the next conversion
-    ADCSRA |= (1 << ADSC);
+    ADCSRA |= (1 << ADSC);                              // re-trigger
 }
 ```
 
-The trick: **the ISR re-triggers the ADC at the end** (`ADCSRA |= (1 << ADSC)`). This creates a continuous sampling loop without polling. The main loop stays free to handle button input and direction state.
+The trick: **ISR re-triggers ADC at the end** — continuous sampling without polling. Main loop stays free for button input.
 
 ### H-bridge state machine
-
-Three motor states, each just a direct write to PORTC selecting two transistors:
 
 ```c
 void motor_state_A(void) {  PORTC = (1 << PC2) | (1 << PC1); }  // forward
@@ -104,37 +92,99 @@ void motor_state_B(void) {  PORTC = (1 << PC3) | (1 << PC0); }  // reverse
 void motor_stop(void)    {  PORTC = 0x00; }
 ```
 
-### Button-debounce + direction selection
+### Button debounce + direction
 
 ```c
 void handle_motor_control(void) {
     uint8_t current_pinb = PINB;
-
     if (!(current_pinb & (1 << PB0))) {
-        _delay_ms(50);                              // first-debounce
-        if (!(PINB & (1 << PB0))) {                 // re-read after delay
-            motor_direction_state = 1;              // forward
-        }
+        _delay_ms(50);
+        if (!(PINB & (1 << PB0))) motor_direction_state = 1;    // forward
     }
     else if (!(current_pinb & (1 << PB1))) {
         _delay_ms(50);
-        if (!(PINB & (1 << PB1))) {
-            motor_direction_state = 2;              // reverse
-        }
+        if (!(PINB & (1 << PB1))) motor_direction_state = 2;    // reverse
     }
-
     if      (motor_direction_state == 1) motor_state_A();
     else if (motor_direction_state == 2) motor_state_B();
     else                                  motor_stop();
 }
 ```
 
-The classic "delay + re-read" pattern eliminates bouncing without a hardware debounce circuit. Reading the pin twice 50 ms apart and only acting if both reads agree guarantees a true press.
+Classic "delay + re-read" debounce — eliminates bouncing without hardware. Reading the pin twice 50 ms apart and only acting if both agree guarantees a true press.
 
 ---
 
 ## What the system does
 
 1. Operator turns the **potentiometer**
-2. ADC samples it continuously (interrupt-driven, ~7800 samples/sec at /128 prescaler)
-3. Sample value sets **OCR2** → PWM duty → mo
+2. ADC samples continuously (interrupt-driven, ~7800 samples/sec at /128 prescaler)
+3. Sample sets **OCR2** → PWM duty → motor speed proportionally
+4. Sample also sets **LED bar mask** → 0–8 LEDs lit
+5. Operator presses fwd/rev → H-bridge switches → motor flips direction
+6. No press → motor stops (debounced state ignores noise)
+
+Complete embedded system on 8-bit MCU — sensor input → real-time conversion → PWM actuator → state machine → debouncing → visual feedback.
+
+---
+
+## Files in this folder
+
+### Source (`code/`)
+- `01_pr_darbs_LED_running_light.c` — first practical work
+- `02_LED_reset_start_stop.c` — 3-button state machine
+- `03_timer_overflow_isr.c` — Timer0 overflow ISR
+- `06_timer_compare_isr.c` — Timer0 CTC compare ISR
+- `09_motor_control_ADC_PWM_Hbridge.c` — **flagship motor controller**
+- `04_app3.c`, `05_app4.c`, `07_app6.c`, `08_app8.c` — intermediate
+
+### Proteus simulations (`proteus/`)
+- `2_pr_darbs.pdsprj`, `3_pr_darbs.pdsprj`, `4_pr_darbs.pdsprj` — practical-work schematics
+- `laboratorijas_5.pdsprj` — lab 5 (December 2025)
+
+---
+
+## How to open & run
+
+**Software:** Microchip Studio (free from Microchip) + Proteus Design Suite (Labcenter Electronics)
+
+1. Microchip Studio: **File → New → Project → GCC C Executable Project**, target `ATmega16`
+2. Replace generated `main.c` with chosen `.c` from `code/`
+3. **Build → Build Solution** (F7) → `.hex` file
+4. Open `.pdsprj` in Proteus
+5. Right-click AVR → **Edit Properties** → Program File = `.hex` from step 3
+6. Click **Play** — simulation runs, AVR executes code, LEDs blink, buttons respond, ADC reads simulated pot
+
+---
+
+## Skills demonstrated
+
+- **AVR C programming** — datasheet-level, not Arduino
+- **Register-level GPIO** — DDRx, PORTx, PINx direct config
+- **ADC** — interrupt-driven continuous sampling, AVCC ref, prescaler choice, channel selection
+- **Timer/PWM** — Timer2 Fast PWM, OC2 output, OCR2 duty
+- **Timer interrupts** — overflow + compare-match ISRs
+- **CTC mode** for Timer0
+- **ISRs** — `sei()`, vector names, ISR-safe code
+- **Bitwise register manipulation** — `(1 << BIT_NAME)` patterns
+- **H-bridge motor direction control** with state machine
+- **Button debouncing** — software delay + re-read
+- **PWM duty from sensor input** — closed-loop in 4 instructions
+- **LED bar graph display** — mask `0xFF << (8 - lvl)`
+- **Proteus simulation**
+- **Microchip Studio toolchain**
+
+---
+
+## Latvian summary (LV)
+
+AVR mikrokontroleru programmēšanas kursa darbu komplekts (RTU, 3. kurss, oktobris–decembris 2025) — deviņas C valodas programmas, kas progresē no LED mirgošanas līdz slēgtas cilpas līdzstrāvas motora vadībai. Visas rakstītas reģistru līmenī (nevis Arduino abstrakcijas), debugētas Proteus pirms ielādes.
+
+**Flagship — GccApplication9 (19.11.2025):** pilna ieguldītā sistēma uz AVR @ 8 MHz:
+- **ADC** — 10-bit, AVCC, kanāls 3, pārtraukuma vadīta nepārtraukta konversija (ISR pati pārstartē)
+- **Timer2 Fast PWM** — OC2 izeja uz PB7, OCR2 aizpildījums no ADC (10→8 bit ar `>> 2`)
+- **LED bar graph** — 8 LED uz PORTD, līmenis ar maskas pieeju `0xFF << (8 - lvl)`
+- **H-tilta vadība** — PC0–PC3, virziena valstu mašīna (A / B / Stop)
+- **Pogu debounce** — 50 ms aizture + atkārtota nolasīšana
+
+Pirmkods `code/`. Proteus `.pdsprj` faili `proteus/`. Atveramas attiecīgi ar Microchip Studio un Proteus Design Suite.

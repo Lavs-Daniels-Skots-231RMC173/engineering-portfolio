@@ -17,88 +17,116 @@
 > Praktiskie un laboratorijas darbi kursā *Rūpnieciskās elektroniskās iekārtas*
 > Lab and practical works covering analog & power electronics foundations
 
-**Context** RTU · Enerģētikas un elektrotehnikas fakultāte (Faculty of Power & Electrical Engineering) · RMCE01 · 2nd year · 2024/2025
-**Course** Rūpnieciskās elektroniskās iekārtas (Industrial Electronic Equipment)
-**Tools** PSIM (circuit simulation) + bench measurement (oscilloscope, multimeter, signal generator)
+**Context** RTU · Enerģētikas un elektrotehnikas fakultāte · RMCE01 · 2nd year · 2024/2025
+**Tools** PSIM (circuit simulation) + bench measurement (oscilloscope, multimeter)
 
 ---
 
 ## Why this matters for the portfolio
 
-This coursework forms the **direct intellectual basis** for my current job role of *Electronics Adjuster (Elektronikas regulētājs)* at Latvijas Finieris. The course taught me to read, simulate, measure and tune rectifiers, voltage stabilizers, voltage regulators with thyristors, op-amp circuits, ADC/DAC converters and sensors — all of which are the building blocks of the industrial electronic equipment I now adjust on the factory floor.
-
-Each lab combined three steps:
-1. **Analytical calculation** of the expected behavior from theory
-2. **PSIM circuit simulation** to verify the analytical prediction
-3. **Bench measurement** on a physical circuit (oscilloscope + voltmeter)
-
-The cross-check between these three is what makes the engineering value — not any single one in isolation.
+This coursework forms the **direct intellectual basis** for my current role as *Electronics Adjuster (Elektronikas regulētājs)* at Latvijas Finieris. Each lab combined three steps: analytical calculation → PSIM simulation → bench measurement. The cross-check between these is what makes the engineering value.
 
 ---
 
-## The 7 works in this folder
+## The 7 works
 
 ### Topic 1 — Diode rectification (Lab #1 + Practical)
-- Comparison of **p-n junction diodes vs Schottky diodes** in rectification
-- **Single-phase half-wave** and **full-wave bridge** rectifier behavior
-- Ripple analysis with and without filter capacitor
-- PSIM model vs bench measurement cross-validation
+- **p-n diodes vs Schottky** in rectification
+- Single-phase half-wave + full-wave bridge
+- Ripple analysis with / without filter capacitor
 
-### Topic 2 — Diode voltage multiplication & stabilization (Lab #2)
-- **Voltage doubler** circuit: applied AC with u_in_amp = 20.25 V, measured DC output u_out = 40.5 V — matches the theoretical 2× peak doubler equation
-- **Zener-diode voltage stabilizer** characterization (load line, regulation factor)
+### Topic 2 — Voltage multiplication & stabilization (Lab #2)
+- **Voltage doubler**: u_in_amp = 20.25 V → u_out = 40.5 V (matches 2× peak)
+- **Zener stabilizer** — load line, regulation factor
 
-### Topic 3 — Thyristor-controlled voltage regulator (Practical: Spriegumu regulatori)
+### Topic 3 — Thyristor voltage regulator (Practical)
+
 ![Thyristor regulator](images/elec_thyristor-02.png)
-*Fig. 1 — Single-phase half-wave controlled rectifier (PSIM): u₁ input voltage, u₂ load voltage, u_vad gate-control voltage at firing angle α = 90°. Behavior shown across the full α = 0…180° range.*
 
-Single-phase **half-wave controlled rectifier** with resistive load Rsl = 10 Ω, firing angle α swept 0…180°. PSIM oscillograms of input/output/control + load behavior across the regulation range.
+*Fig. 1 — Thyristor-controlled rectifier (PSIM, α = 90°): u₁, u₂, u_vad waveforms*
 
-### Topic 4 — Linear compensation voltage stabilizer (Lab #3)
-Built the bench circuit, applied input U_in = 15 V, regulated output U_out = 10 V via potentiometer R2. Characterized:
-- Stabilization coefficient
-- Output impedance
-- Load regulation
+Single-phase half-wave with R_sl = 10 Ω, α swept 0…180°.
+
+### Topic 4 — Linear stabilizer (Lab #3)
+U_in = 15 V → U_out = 10 V via potentiometer R2. Stabilization coefficient + output impedance.
 
 ### Topic 5 — Op-amps, ADC, DAC (Practical #3)
+
 ![Op-amp](images/elec_opamp-03.png)
-*Fig. 2 — Inverting op-amp configuration in PSIM: V_s = ±5 V, differential gain K_v = 100000. Verified gain calculation A = R2/R1 for R2 = 10 kΩ and 100 kΩ, both with DC input 0.01 V and 1 kHz sinusoidal input — analytical, PSIM and bench all agree.*
 
-- Classical **inverting op-amp** with V_s = ±5 V, K_v = 100000
-- Verified gain A = R2/R1 for R2 = 10 kΩ → A = -10 and R2 = 100 kΩ → A = -100
-- Both DC behavior and 1 kHz sinusoidal (Uin_amp = 0.01 V → Uout_amp = 100 mV / 1 V)
-- ADC and DAC converter characterization
+*Fig. 2 — Inverting op-amp (V_s = ±5 V, K_v = 100000): verified A = R2/R1 for R2 = 10 kΩ → A = -10 and R2 = 100 kΩ → A = -100*
 
-### Topic 6 — Voltage doubler (Lab #2 second part)
+Both DC + 1 kHz sinusoidal. ADC/DAC converter characterization.
+
+### Topic 6 — Voltage doubler bench
+
 ![Voltage doubler](images/elec_doubler-2.png)
-*Fig. 3 — Voltage-doubler bench measurement: u_in_amp = 20.25 V (yellow trace), u_out_DC = 40.5 V (cyan trace) on the load. The 2× ratio confirms the doubler topology is working as designed.*
 
-### Topic 7 — Resistive potentiometric sensors (Lab #5)
+*Fig. 3 — Bench: u_in_amp = 20.25 V → u_out_DC = 40.5 V on load*
+
+### Topic 7 — Potentiometric sensors (Lab #5)
+
 ![Sensor characterization](images/elec_sensor-02.png)
-*Fig. 4 — Static transfer curve U_out = f(X) of a linear-displacement potentiometric sensor. Top curve = voltmeter-only loading; bottom curve = with R_sl = 4.7 kΩ shunt. The loading effect linearizes the curve at low X but adds a substantial error at full deflection — quantified for the design.*
 
-Resistive potentiometric sensor for linear-displacement measurement. Captured **static transfer curve** U_out = f(X) in two conditions:
-- Unloaded (high-impedance voltmeter only)
-- Loaded (with R_sl = 4.7 kΩ shunt)
+*Fig. 4 — Static transfer curve U_out = f(X): top unloaded, bottom loaded with R_sl = 4.7 kΩ — loading effect quantified*
 
-Quantified the sensor non-linearity under loading — a real-world issue when interfacing potentiometric sensors to ADCs with finite input impedance.
+Real-world ADC interfacing problem.
 
 ---
 
 ## Files in this folder
 
-### Reports / labs
-| File | Topic | Format |
-|---|---|---|
-| `Lab1_Diozu_lietojumi_taisngriesanai.pdf` | Lab #1: Diodes — rectification, p-n vs Schottky | PDF, 2.5 MB |
-| `Praktiskais_Diozu_taisngriesana.docx` | Practical: Diode rectification | Word, 1.2 MB |
-| `Lab2_Diozu_daudzkarsosana_stabilizacija.pdf` | Lab #2: Voltage multiplication & stabilization | PDF, 812 KB |
-| `Lab3_Linearie_kompensacijas_stabilizatori.pdf` | Lab #3: Linear compensation stabilizers | PDF, 688 KB |
-| `Praktiskais_Spriegumu_regulatori.pdf` | Practical: Voltage regulators (thyristor) | PDF, 1.0 MB |
-| `Praktiskais3_Pastiprinataji_ADC_DAC.pdf` | Practical #3: Op-amps, ADC, DAC | PDF, 453 KB |
-| `Lab5_Sensoru_izpete.pdf` | Lab #5: Sensors | PDF, 1.9 MB |
-
-### Source files
-| Folder | What's inside |
+| File | Topic |
 |---|---|
-| `psim_sources/` | **Editable PSIM circuit files** (`.psimsch`) for all simulations — open and modify in PSIM 2025 or newer |
+| `Lab1_Diozu_lietojumi_taisngriesanai.pdf` | Diode rectification (2.5 MB) |
+| `Praktiskais_Diozu_taisngriesana.docx` | Diode practical (1.2 MB) |
+| `Lab2_Diozu_daudzkarsosana_stabilizacija.pdf` | Voltage doubling + stabilization (812 KB) |
+| `Lab3_Linearie_kompensacijas_stabilizatori.pdf` | Linear stabilizers (688 KB) |
+| `Praktiskais_Spriegumu_regulatori.pdf` | Thyristor regulator (1.0 MB) |
+| `Praktiskais3_Pastiprinataji_ADC_DAC.pdf` | Op-amps, ADC, DAC (453 KB) |
+| `Lab5_Sensoru_izpete.pdf` | Sensors (1.9 MB) |
+| `psim_sources/*.psimsch` | Editable PSIM circuit files |
+| `images/` | Figures used in this README |
+
+---
+
+## How to view
+
+### The PDFs
+Standard PDF viewer. Each report: task → theory → PSIM simulation (oscillograms) → bench measurement → comparison → conclusions.
+
+### PSIM source files
+**Software:** PSIM 2025 (or PSIM 11+). Student licenses available.
+
+**Open:** PSIM → *File → Open* → `.psimsch` → schematic loads with all components + probes pre-placed.
+
+**Run:** *Simulate → Run Simulation* (F8) → results in SIMVIEW window.
+
+**Modify:** change R, swap diode model, change thyristor α — re-run to see effect.
+
+---
+
+## Skills demonstrated
+
+- **Analog electronics** — diode rectification, Zener regulation, voltage multipliers
+- **Power electronics** — thyristor-controlled rectifiers, firing-angle control
+- **Op-amp circuits** — inverting, gain calculation
+- **ADC/DAC fundamentals**
+- **Sensor characterization** — resistive potentiometric + loading effects
+- **PSIM circuit simulation**
+- **Bench measurement** — oscilloscope, voltmeter, signal generator
+- **Three-way validation** — analytical / simulated / measured cross-check
+
+---
+
+## Latvian summary (LV)
+
+Septiņu laboratorijas + praktisko darbu komplekts kursā *Rūpnieciskās elektroniskās iekārtas* (RTU EEF, 2024./2025.):
+1. **Diožu lietojumi taisngriešanai** — p-n vs Šotki diodes, vienfāzes taisngrieži
+2. **Diožu daudzkāršošana + stabilizācija** — divkāršotājs (20,25 V_amp → 40,5 V_DC), Zenera stabilizators
+3. **Spriegumu regulatori** — vienfāzes vadāmais taisngriezis ar tiristoru
+4. **Lineārie kompensācijas stabilizatori** — U_in 15 V → U_out 10 V
+5. **Pastiprinātāji, ACP/CAP** — operacionālie pastiprinātāji, invertējošais slēgums
+6. **Sensori** — rezistīvie potenciometriskie sensori
+
+Visi darbi apvienoja analītiskos aprēķinus, PSIM modelēšanu un stenda mērījumus. Tieši šis kurss veido manas pašreizējās *Elektronikas regulētāja* darba vietas Latvijas Finierī intelektuālo bāzi.
