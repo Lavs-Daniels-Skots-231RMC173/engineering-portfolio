@@ -25,6 +25,8 @@ I'm a 4th-year Mechatronics student at **Riga Technical University** (GPA 9.21 /
 
 Each project has its own folder with a detailed README (background, methods, file-by-file breakdown, embedded figures, how-to-run instructions) and the **full original source files** — drawings, CAD models, simulation files, source code, technical reports.
 
+> 🦾 **Newest work lives in a separate repo:** [**so101-native-ubuntu-ros2-moveit**](https://github.com/Lavs-Daniels-Skots-231RMC173/so101-native-ubuntu-ros2-moveit) — a real-hardware SO-101 robot arm on **ROS 2 Jazzy + MoveIt**.
+
 ---
 
 ## 🔧 Tech Stack
@@ -242,17 +244,14 @@ Four foundational drawings practicing multi-view projection, section views, dime
 </td>
 <td width="50%" valign="top">
 
-### 🎯 In progress / coming next
+### [🦾 ROS 2 · SO-101 robot arm](https://github.com/Lavs-Daniels-Skots-231RMC173/so101-native-ubuntu-ros2-moveit)
+[![Open](https://img.shields.io/badge/Open_repo-→-F59E0B?style=for-the-badge)](https://github.com/Lavs-Daniels-Skots-231RMC173/so101-native-ubuntu-ros2-moveit)
 
-Future additions to this portfolio:
+**Real-hardware ROS 2 + MoveIt bring-up** *(separate repo)*
 
-- ROS / ROS2 robot arm control project
-- Industrial network integration (Profinet, EtherCAT)
-- TIA Portal SCL/LAD program on real Siemens S7-1200
-- Computer vision inspection (Cognex / OpenCV)
-- ISO 13849 safety-rated design
+Physical SO-101 / SO-ARM101 leader–follower arm on native Ubuntu: LeRobot teleop + ACT dataset workflow, a full `ros2_control` path and MoveIt planning validated against the real robot. An honest engineering log of the calibration-reconciliation problem across servo EEPROM → LeRobot → ROS 2 → URDF → MoveIt.
 
-Want to collaborate or hire? See the contact section below.
+`ROS 2 Jazzy` `MoveIt` `ros2_control` `LeRobot` `real hardware`
 
 </td>
 </tr>
