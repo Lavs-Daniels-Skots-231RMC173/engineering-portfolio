@@ -249,7 +249,7 @@ Four foundational drawings practicing multi-view projection, section views, dime
 
 **Real-hardware ROS 2 + MoveIt bring-up** *(separate repo)*
 
-Physical SO-101 / SO-ARM101 leader–follower arm on native Ubuntu: LeRobot teleop + ACT dataset workflow, a full `ros2_control` path and MoveIt planning validated against the real robot. An honest engineering log of the calibration-reconciliation problem across servo EEPROM → LeRobot → ROS 2 → URDF → MoveIt.
+Physical SO-101 / SO-ARM101 leader–follower arm on native Ubuntu: 59 Hz teleop, a 2-camera **ACT** policy trained and pushed to Hugging Face, and a full `ros2_control` + **MoveIt** stack exercised on the real arm. An honest engineering log — the open problem is reconciling calibration across servo EEPROM → LeRobot → ROS 2 → URDF → MoveIt so the model and the physical robot agree (end-to-end pose alignment still in progress).
 
 `ROS 2 Jazzy` `MoveIt` `ros2_control` `LeRobot` `real hardware`
 
