@@ -301,6 +301,13 @@ I'm open to **junior controls / automation / electronics engineer** roles and in
 
 ---
 
+## 🔗 Related projects
+
+- **[SkateArm — bimanual work-cell & Skate Commander cockpit](https://github.com/Lavs-Daniels-Skots-231RMC173/skatearm)** — a sim-first MuJoCo work-cell + browser cockpit (drag-IK, natural-language → program, vision-guided pick) for the R.Botic Skate robot.
+- **[SO-101 · ROS 2 + MoveIt real-hardware bring-up](https://github.com/Lavs-Daniels-Skots-231RMC173/so101-native-ubuntu-ros2-moveit)** — a real SO-101 / SO-ARM101 arm pair on ROS 2 Jazzy + MoveIt + LeRobot.
+
+---
+
 <div align="center">
 
 *This portfolio is licensed under [MIT](LICENSE) · feel free to use the README structure as a template for your own.*
